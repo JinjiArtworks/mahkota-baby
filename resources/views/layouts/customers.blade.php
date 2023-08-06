@@ -1,125 +1,190 @@
 <!DOCTYPE html>
-<!--[if lte IE 8]> <html class="oldie" lang="en"> <![endif]-->
-<!--[if IE 9]> <html class="ie9" lang="en"> <![endif]-->
-<!--[if gt IE 9]><!-->
-<html lang="en"> <!--<![endif]-->
+<html lang="en" data-theme="cupcake">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="format-detection" content="telephone=no">
-    <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
-    <title>Bambino</title>
-    <link rel="stylesheet" href="{{ asset('templates/Bambino/css/fancySelect.css') }}" />
-    <link rel="stylesheet" href="{{ asset('templates/Bambino/css/uniform.css') }}" />
-    <link rel="stylesheet" href="{{ asset('templates/Bambino/css/jquery.bxslider.css') }}" />
-    <link rel="stylesheet" href="{{ asset('templates/Bambino/css/jquery-ui-1.10.4.custom.css') }}">
-    <link rel="stylesheet" href="{{ asset('templates/Bambino/css/all.css') }}" />
-    <link media="screen" rel="stylesheet" type="text/css" href="{{ asset('templates/Bambino/css/screen.css') }}" />
-    <!--[if lt IE 9]>
-  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
- <![endif]-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.5.1/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;1,300&display=swap"
+        rel="stylesheet">
+
 </head>
+
 <body>
-    <div id="wrapper">
-        <div class="wrapper-holder">
-            <div class="header-holder">
-                <header id="header">
-                    <span class="logo"><a href="index.html">Bambino</a></span>
-                    <div class="tools-nav_holder">
-                        <ul class="tools-nav">
-                            <li><a href="#">My account</a></li>
-                            <li class="login"><a href="#">Logout</a></li>
-                        </ul>
-                        <div class="checkout">
-                            <span>3 products, <span class="pink">$380,50</span></span>
-                            <a href="cart.html" class="btn btn_checkout">Checkout</a>
+    <div class="navbar bg-secondary rounded-lg">
+        <div class="flex-1">
+            <a class="btn btn-ghost normal-case text-xl text-white">Mahkota Baby</a>
+        </div>
+        <div class="navbar-center hidden lg:flex justify-center text-white">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="/">Home</a></li>
+                <li><a href="/products">Produk Kami</a></li>
+                <li><a>Item 3</a></li>
+                <li><a>Item 4</a></li>
+            </ul>
+        </div>
+        <div class="flex-none">
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle">
+                    <div class="indicator">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" style="color: white">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        {{-- <span class="badge badge-sm indicator-item">8</span> --}}
+                    </div>
+                </label>
+                <div tabindex="0" class="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
+                    <div class="card-body">
+                        {{-- <span class="font-bold text-lg">8 Items</span>
+                        <span class="text-info">Subtotal: $999</span> --}}
+                        <div class="card-actions">
+                            <a href="/cart" class="btn btn-secondary btn-block text-white">Lihat Keranjang</a>
                         </div>
                     </div>
-                    <div class="clear"></div>
-                    <a class="menu_trigger" href="#">menu</a>
-                    <nav id="nav">
-                        <ul class="navi">
-                            <li class="searc_li">
-                                <div class="ul_search li">
-                                    <a class="search" href="#"><span>search</span></a>
-                                    <form method="get" class="searchform" action="#">
-                                        <input type="text" class="field" name="s" id="s"
-                                            placeholder="What are you looking for?" />
-                                        <input type="submit" class="submit" value="" />
-                                        <div class="clear"></div>
-                                    </form>
-                                </div>
+                </div>
+            </div>
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full">
+                        <img src="{{ asset('images/daisy/photo-1534528741775-53994a69daeb.jpg') }}" />
+                    </div>
+                </label>
+                @if (Auth::check())
+                    @if (Auth::user()->roles == 'Customers')
+                        <ul tabindex="0"
+                            class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                            <li><a href="">{{ Auth::user()->name }}</li></a>
+                            <li>
+                                <a class="justify-between">
+                                    Profile
+                                </a>
                             </li>
-                            <li><a href="products.html">Our Collection</a></li>
-                            <li><a href="products.html">Top Products </a></li>
-                            <li><a href="products.html">Best Sellers</a></li>
-                            <li><a href="products.html">Gifts</a></li>
-                            <li><a href="products.html">Promotions</a></li>
-                        </ul>
-                        <div class="ul_search">
-                            <a class="search" href="#"><span>search</span></a>
-                            <form method="get" class="searchform" action="#">
-                                <input type="text" class="field" name="s" id="s"
-                                    placeholder="What are you looking for?" />
-                                <input type="submit" class="submit" value="" />
+                            <li><a>Pesanan</a></li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <li><button type="submit">Logout</button></li>
                             </form>
-                        </div>
-                    </nav>
-                </header>
-            </div>
-            @yield('content')
-        </div>
-        <footer id="footer">
-            <div class="footer-content">
-                <ul class="left_side">
-                    <li>
-                        <span>Our mission:</span>
-                        <p style="line-height: 26px;">Veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit quia.</p>
-                    </li>
-                    <li>
-                        <span>Popular posts:</span>
-                        <a href="#">Perspiciatis unde omnis</a>
-                        <a href="#">Numquam eius</a>
-                        <a href="#">Corporis suscipit laboriosam</a>
-                        <a class="last" href="#">Neque porro quisquam</a>
-                    </li>
-                    <li>
-                        <span>Contact us:</span>
-                        <p>Bambino INC.<br />6737 Arch St, PA 19107</p>
-                        <p>Tel. (421) 562 524 534<br />office@bambino.com</p>
+                        </ul>
+                    @else
+                        <ul tabindex="0"
+                            class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                            <li><a href="">Lihat Toko</a></li>
+                            <li><a>Settings</a></li>
+                            <li><a>Logout</a></li>
+                        </ul>
+                    @endif
+                @else
+                    <ul tabindex="0"
+                        class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/register">Register</a></li>
+                    </ul>
+                @endif
 
-                    </li>
-                </ul>
-                <ul class="right_side">
-                    <li>
-                        <span>Social media:</span>
-                        <div class="social">
-                            <a href="#" class="fb">Facebook</a>
-                            <a href="#" class="tw">Twitter</a>
-                        </div>
-                        <div class="social">
-                            <a href="#" class="gl">Google+</a>
-                            <a href="#" class="pn">Pinterest</a>
-                        </div>
-                    </li>
-                </ul>
-                <div class="clear"></div>
-                <p class="copy">Copyright 2014 Bambino. All rights reserved.</p>
             </div>
-        </footer>
+        </div>
     </div>
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="{{ asset('templates/Bambino/js/jcarousellite.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('templates/Bambino/js/jquery.placeholder.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('templates/Bambino/js/jquery.uniform.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('templates/Bambino/js/fancySelect.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('templates/Bambino/js/jquery.bxslider.js') }}"></script>
-    <script src="{{ asset('templates/Bambino/js/jquery-ui-1.10.4.custom.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('templates/Bambino/js/main.js') }}"></script>
+    </header>
+    <div class="container mx-auto px-6">
+        @yield('breadcrumbs')
+        @yield('content')
+    </div>
+    <footer class="footer footer-center p-10 bg-secondary text-primary-content w-full rounded-lg">
+        <div>
+            <svg width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                fill-rule="evenodd" clip-rule="evenodd" class="inline-block fill-current">
+                <path
+                    d="M22.672 15.226l-2.432.811.841 2.515c.33 1.019-.209 2.127-1.23 2.456-1.15.325-2.148-.321-2.463-1.226l-.84-2.518-5.013 1.677.84 2.517c.391 1.203-.434 2.542-1.831 2.542-.88 0-1.601-.564-1.86-1.314l-.842-2.516-2.431.809c-1.135.328-2.145-.317-2.463-1.229-.329-1.018.211-2.127 1.231-2.456l2.432-.809-1.621-4.823-2.432.808c-1.355.384-2.558-.59-2.558-1.839 0-.817.509-1.582 1.327-1.846l2.433-.809-.842-2.515c-.33-1.02.211-2.129 1.232-2.458 1.02-.329 2.13.209 2.461 1.229l.842 2.515 5.011-1.677-.839-2.517c-.403-1.238.484-2.553 1.843-2.553.819 0 1.585.509 1.85 1.326l.841 2.517 2.431-.81c1.02-.33 2.131.211 2.461 1.229.332 1.018-.21 2.126-1.23 2.456l-2.433.809 1.622 4.823 2.433-.809c1.242-.401 2.557.484 2.557 1.838 0 .819-.51 1.583-1.328 1.847m-8.992-6.428l-5.01 1.675 1.619 4.828 5.011-1.674-1.62-4.829z">
+                </path>
+            </svg>
+            <p class="font-bold">
+                ACME Industries Ltd. <br />Providing reliable tech since 1992
+            </p>
+            <p>Copyright © 2023 - All right reserved</p>
+        </div>
+        <div>
+            <div class="grid grid-flow-col gap-4">
+                <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        class="fill-current">
+                        <path
+                            d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z">
+                        </path>
+                    </svg></a>
+                <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        class="fill-current">
+                        <path
+                            d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z">
+                        </path>
+                    </svg></a>
+                <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        class="fill-current">
+                        <path
+                            d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z">
+                        </path>
+                    </svg></a>
+            </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js"></script>
+    @yield('script')
 </body>
 
 </html>
+
+{{-- <div class="navbar bg-secondary">
+    <div class="flex-1">
+        <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
+    </div>
+    <div class="flex-none">
+        <div class="dropdown dropdown-end">
+            <label tabindex="0" class="btn btn-ghost btn-circle">
+                <div class="indicator">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span class="badge badge-sm indicator-item">8</span>
+                </div>
+            </label>
+            <div tabindex="0"
+                class="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
+                <div class="card-body">
+                    <span class="font-bold text-lg">8 Items</span>
+                    <span class="text-info">Subtotal: $999</span>
+                    <div class="card-actions">
+                        <button class="btn btn-primary btn-block">View cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dropdown dropdown-end">
+            <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                <div class="w-10 rounded-full">
+                    <img src="{{ asset('images/daisy/photo-1534528741775-53994a69daeb.jpg') }}" />
+                </div>
+            </label>
+            <ul tabindex="0"
+                class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                <li>
+                    <a class="justify-between">
+                        Profile
+                        <span class="badge">New</span>
+                    </a>
+                </li>
+                <li><a>Settings</a></li>
+                <li><a>Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</div> --}}

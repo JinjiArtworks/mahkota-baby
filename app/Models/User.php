@@ -20,6 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
         'password',
     ];
 
@@ -41,4 +42,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function cities()
+    {
+        return $this->belongsTo(City::class, 'city_id');
+    }
+    public function reviews()
+    {
+        return $this->belongsTo(Review::class);
+    }
+    public function wishlist()
+    {
+        return $this->hasOne(Wishlist::class);
+    }
 }
