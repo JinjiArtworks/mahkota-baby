@@ -181,61 +181,6 @@
             @endif
         </div>
     </div>
-    {{-- <dialog id="my_modal_3" class="modal">
-        <form method="POST" class="modal-box"
-            action="{{ route('cart.update', ['id' => Auth::user()->id]) }}"
-            enctype="multipart/form-data">
-            @csrf
-            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-            <h3 class="font-bold text-lg">Tambah Alamat</h3>
-            <label class="label">
-                <span class="label-text">Alamat</span>
-            </label>
-            @if ($userAddress == null)
-                <input type="text" placeholder="Type here" required name="address"
-                    class="block p-2 text-gray-600 w-full text-sm" />
-            @else
-                <input type="text" placeholder="Type here" required name="address"
-                    class="block p-2 text-gray-600 w-full text-sm" value="{{ $userAddress }}"/>
-            @endif
-
-            <label class="label">
-                <span class="label-text">Provinsi</span>
-            </label>
-            <select class="block p-2 text-gray-600 w-full text-sm" name="province">
-                @if ($getUsersProvince == null)
-                    @foreach ($allProvince as $item)
-                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                    @endforeach
-                @else
-                    <option value="{{ $getUsersProvince }}">{{ $province->name }}</option>
-                    @foreach ($allProvince as $item)
-                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                    @endforeach
-                @endif
-            </select>
-
-            <label class="label">
-                <span class="label-text">Kota</span>
-            </label>
-            <select class="block p-2 text-gray-600 w-full text-sm" name="city">
-                @if ($getUsersCity == null)
-                    @foreach ($allCities as $item)
-                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                    @endforeach
-                @else
-                    <option value="{{ $getUsersCity }}">{{ $city->name }}</option>
-                    @foreach ($allCities as $item)
-                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                    @endforeach
-                @endif
-            </select>
-            <button
-                class="mt-4 btn-checkout rounded-xl font-semibold py-3 text-sm text-white uppercase w-full"
-                style="background:#ef9fbc" type="submit">Konfirmasi
-            </button>
-        </form>
-    </dialog> --}}
     <input type="checkbox" id="my_modal_7" class="modal-toggle" />
     <div class="modal">
         <form method="POST" class="modal-box" action="{{ route('cart.update', ['id' => Auth::user()->id]) }}"

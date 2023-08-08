@@ -4,6 +4,8 @@ use App\Http\Controllers\Customers\CartController;
 use App\Http\Controllers\Customers\CheckoutProductController;
 use App\Http\Controllers\Customers\HomeController;
 use App\Http\Controllers\Customers\ProductController;
+use App\Http\Controllers\Customers\RiwayatPesananController;
+use App\Http\Controllers\Customers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +28,7 @@ Route::group(['as' => 'nav.'], function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::group(['as' => 'products.'], function () {
-        Route::post('/store-wishlist', [ProductController::class, 'store'])->name('wishlist');
+        Route::post('/store-wishlist', [ProductController::class, 'addToWishlist'])->name('addToWishlist');
         Route::get('/belanja', [ProductController::class, 'search'])->name('search');
         // Route::get('/belanja', [ProductController::class, 'searchByCat'])->name('searchByCat');
     });
@@ -39,8 +41,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/update-profile', [ProfileController::class, 'update'])->name('update');
     });
     Route::group(['as' => 'cart.'], function () {
-        Route::post('/update-address', [CartController::class, 'update'])->name('update');
-        
+        Route::post('/update-address', [CartController::class, 'update'])->name('updateAddress');
+
         Route::post('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add');
         Route::get('/cart', [CartController::class, 'index'])->name('index');
         Route::get('/remove-from-cart/{id}', [CartController::class, 'destroy'])->name('delete');
@@ -51,13 +53,11 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/checkout-batik/payments', [CheckoutProductController::class, 'store'])->name('store');
     });
     Route::group(['as' => 'history-order.'], function () {
-        Route::get('/history-order', [HistoryOrderController::class, 'index'])->name('index');
-        Route::get('/history-detail/{id}', [HistoryOrderController::class, 'detail'])->name('detail');
-        Route::get('/orders-delete/{id}', [HistoryOrderController::class, 'remove'])->name('delete');
-        Route::post('/send-review/{id}', [HistoryOrderController::class, 'store'])->name('review');
-        Route::post('/send-returns/{id}', [HistoryOrderController::class, 'storeReturns'])->name('returns');
-        Route::post('/send-returns-back/{id}', [HistoryOrderController::class, 'storeReturnsBack'])->name('sendReturnsBack');
-        Route::post('/accept-item/{id}', [HistoryOrderController::class, 'acceptOrder'])->name('acceptOrder');
+        Route::get('/riwayat-pesanan', [RiwayatPesananController::class, 'index'])->name('index');
+        Route::get('/detail-pesanan/{id}', [RiwayatPesananController::class, 'detailsOrder'])->name('detail');
+        Route::get('/orders-delete/{id}', [RiwayatPesananController::class, 'remove'])->name('delete');
+        Route::post('/send-review/{id}', [RiwayatPesananController::class, 'store'])->name('review');
+        Route::post('/accept-item/{id}', [RiwayatPesananController::class, 'acceptOrder'])->name('acceptOrder');
     });
 
     Route::group(['as' => 'custom.'], function () {

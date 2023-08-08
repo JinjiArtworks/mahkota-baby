@@ -53,6 +53,20 @@
                 </div>
             </div>
             <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle">
+                    <div class="indicator">
+                        <i class="fa-regular text-white text-lg fa-heart"></i>
+                    </div>
+                </label>
+                <div tabindex="0" class="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
+                    <div class="card-body">
+                        <div class="card-actions">
+                            <a href="/wishlist" class="btn btn-secondary btn-block text-white">Lihat Wishlist</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dropdown dropdown-end">
                 <label tabindex="0" class="btn btn-ghost btn-circle avatar">
                     <div class="w-10 rounded-full">
                         <img src="{{ asset('images/daisy/photo-1534528741775-53994a69daeb.jpg') }}" />
@@ -62,13 +76,13 @@
                     @if (Auth::user()->roles == 'Customers')
                         <ul tabindex="0"
                             class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><a href="">{{ Auth::user()->name }}</li></a>
+                            <li><a href="" class="font-bold">{{ Auth::user()->name }}</li></a>
                             <li>
-                                <a class="justify-between">
+                                <a href="/profile" class="justify-between">
                                     Profile
                                 </a>
                             </li>
-                            <li><a>Pesanan</a></li>
+                            <li><a href="/riwayat-pesanan">Pesanan</a></li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <li><button type="submit">Logout</button></li>
@@ -130,9 +144,11 @@
                         <path
                             d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z">
                         </path>
-                    </svg></a>
+                    </svg>
+                </a>
             </div>
     </footer>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://app.sandbox.midtrans.com/snap/snap.js"></script>
@@ -141,50 +157,3 @@
 
 </html>
 
-{{-- <div class="navbar bg-secondary">
-    <div class="flex-1">
-        <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
-    </div>
-    <div class="flex-none">
-        <div class="dropdown dropdown-end">
-            <label tabindex="0" class="btn btn-ghost btn-circle">
-                <div class="indicator">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                    <span class="badge badge-sm indicator-item">8</span>
-                </div>
-            </label>
-            <div tabindex="0"
-                class="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
-                <div class="card-body">
-                    <span class="font-bold text-lg">8 Items</span>
-                    <span class="text-info">Subtotal: $999</span>
-                    <div class="card-actions">
-                        <button class="btn btn-primary btn-block">View cart</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="dropdown dropdown-end">
-            <label tabindex="0" class="btn btn-ghost btn-circle avatar">
-                <div class="w-10 rounded-full">
-                    <img src="{{ asset('images/daisy/photo-1534528741775-53994a69daeb.jpg') }}" />
-                </div>
-            </label>
-            <ul tabindex="0"
-                class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                <li>
-                    <a class="justify-between">
-                        Profile
-                        <span class="badge">New</span>
-                    </a>
-                </li>
-                <li><a>Settings</a></li>
-                <li><a>Logout</a></li>
-            </ul>
-        </div>
-    </div>
-</div> --}}

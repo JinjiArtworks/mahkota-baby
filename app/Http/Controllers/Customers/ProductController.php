@@ -26,16 +26,18 @@ class ProductController extends Controller
         return view('customers.products.detail-products', compact('products', 'wishlist'));
     }
 
-    // public function store(Request $request)
-    // {
-    //     // Send into Wishlist
-    //     $user = Auth::user()->id;
-    //     $product = Wishlist::create([
-    //         'users_id' => $user,
-    //         'products_id' => $request->products,
-    //     ]);
-    //     return redirect('/wishlist')->with('success', 'Produk berhasil ditambahkan kedalam wishlist');
-    // }
+    public function addToWishlist(Request $request)
+    {
+        // Send into Wishlist
+        $user = Auth::user()->id;
+        // return dd($user);
+
+        Wishlist::create([
+            'user_id' => $user,
+            'product_id' => $request->products,
+        ]);
+        return redirect('/wishlist')->with('success', 'Produk berhasil ditambahkan kedalam wishlist');
+    }
 
     // public function search(Request $request)
     // {

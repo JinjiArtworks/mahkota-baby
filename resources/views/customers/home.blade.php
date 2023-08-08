@@ -35,29 +35,6 @@
     </div>
 @endsection
 @section('content')
-    <div class="carousel rounded-box my-4">
-        <div class="carousel-item">
-            <img src="{{ asset('images/daisy/photo-1559703248-dcaaec9fab78.jpg') }}" alt="Burger" />
-        </div>
-        <div class="carousel-item">
-            <img src="{{ asset('images/daisy/photo-1565098772267-60af42b81ef2.jpg') }}" alt="Burger" />
-        </div>
-        <div class="carousel-item">
-            <img src="{{ asset('images/daisy/photo-1572635148818-ef6fd45eb394.jpg') }}" alt="Burger" />
-        </div>
-        <div class="carousel-item">
-            <img src="{{ asset('images/daisy/photo-1494253109108-2e30c049369b.jpg') }}" alt="Burger" />
-        </div>
-        <div class="carousel-item">
-            <img src="{{ asset('images/daisy/photo-1550258987-190a2d41a8ba.jpg') }}" alt="Burger" />
-        </div>
-        <div class="carousel-item">
-            <img src="{{ asset('images/daisy/photo-1559181567-c3190ca9959b.jpg') }}" alt="Burger" />
-        </div>
-        <div class="carousel-item">
-            <img src="{{ asset('images/daisy/photo-1601004890684-d8cbf643f5f2.jpg') }}" alt="Burger" />
-        </div>
-    </div>
     @foreach ($categories as $item)
         <div class="carousel relative container mx-auto rounded-xl" style="max-width:1600px;">
             <div class="carousel-inner relative overflow-hidden w-full">
@@ -164,7 +141,8 @@
             @foreach ($products as $item)
                 <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
                     <a href="/detail-product/{{ $item->id }}">
-                        <img class="hover:grow hover:shadow-lg " style="width: 450px; height: 300px" src="{{ asset('images/' . $item->gambar) }}">
+                        <img class="hover:grow hover:shadow-lg " style="width: 450px; height: 300px"
+                            src="{{ asset('images/' . $item->gambar) }}">
                         <div class="pt-3 flex items-center justify-between">
                             <p class="">{{ $item->nama }}</p>
                             <svg class="h-6 w-6 fill-current text-gray-500 hover:text-black"
