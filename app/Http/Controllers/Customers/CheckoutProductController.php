@@ -18,9 +18,10 @@ class CheckoutProductController extends Controller
 {
     public function index(Request $request)
     {
+        // return dd($request->all());
         $user = Auth::user();
         $cart = session()->get('cart');
-
+        $getCoupon = $request->coupon;
         $userAddress = Auth::user()->address;
         $getUsersCity = Auth::user()->city_id;
         $getUsersProvince = Auth::user()->province_id;
@@ -30,40 +31,46 @@ class CheckoutProductController extends Controller
 
         $getServices = $request->service;
         // return dd($request->all());
-        if ($request->origin && $request->destination && $request->berat && $request->courier && $request->province && $request->service) {
-            $origin = $request->origin;
-            $destination = $request->destination;
-            $weight = $request->berat;
-            $courier = $request->courier;
-            $province = $request->province;
-            $service = $request->service;
-            // return dd($service);
-            $response = Http::asForm()->withHeaders([
-                'key' => '91f6ce360df9a6e2ca7badaae61f5b78'
-            ])->post('https://api.rajaongkir.com/starter/cost', [
-                'origin' => $origin,
-                'destination' => $destination,
-                'weight' => $weight,
-                'courier' => $courier,
-                'province' => $province,
-                'service' => $service,
-            ]);
-            $okeServices = $response['rajaongkir']['results'][0]['costs'][0]['service'];
-            if ($courier == 'jne') {
-                if ($service == 'OKE') {
-                    $cekongkir = $response['rajaongkir']['results'][0]['costs'][0]['cost'][0]['value'];
-                } else if ($service == 'REG') {
-                    $cekongkir = $response['rajaongkir']['results'][0]['costs'][1]['cost'][0]['value'];
+        if ($request->courier == 'jne') {
+            if ($request->origin && $request->destination && $request->berat && $request->courier && $request->province && $request->service) {
+                $origin = $request->origin;
+                $destination = $request->destination;
+                $weight = $request->berat;
+                $courier = $request->courier;
+                $province = $request->province;
+                $service = $request->service;
+                // return dd($service);
+                $response = Http::asForm()->withHeaders([
+                    'key' => '91f6ce360df9a6e2ca7badaae61f5b78'
+                ])->post('https://api.rajaongkir.com/starter/cost', [
+                    'origin' => $origin,
+                    'destination' => $destination,
+                    'weight' => $weight,
+                    'courier' => $courier,
+                    'province' => $province,
+                    'service' => $service,
+                ]);
+                $okeServices = $response['rajaongkir']['results'][0]['costs'][0]['service'];
+                if ($courier == 'jne') {
+                    if ($service == 'OKE') {
+                        $cekongkir = $response['rajaongkir']['results'][0]['costs'][0]['cost'][0]['value'];
+                    } else if ($service == 'REG') {
+                        $cekongkir = $response['rajaongkir']['results'][0]['costs'][1]['cost'][0]['value'];
+                    }
                 }
+            } else {
+                $origin = '';
+                $destination = '';
+                $weight = '';
+                $courier = '';
+                $province = '';
+                $cekongkir = null;
             }
-        } else {
-            $origin = '';
-            $destination = '';
-            $weight = '';
-            $courier = '';
-            $province = '';
-            $cekongkir = null;
         }
+        else{
+            $cekongkir = 0;
+        }
+
         // $userName = $user->name;
         // payment gateway
         \Midtrans\Config::$serverKey = 'SB-Mid-server-yUxga--v_4EQ_EKe8TWMMmbZ';
@@ -73,7 +80,7 @@ class CheckoutProductController extends Controller
         \Midtrans\Config::$isSanitized = true;
         // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = true;
-        $grandTotal =  $request->total + $cekongkir;
+        $grandTotal =  $request->total + $cekongkir - $getCoupon;
 
         $params = array(
             'transaction_details' => array(
@@ -87,12 +94,13 @@ class CheckoutProductController extends Controller
         );
         $snapToken = \Midtrans\Snap::getSnapToken($params);
         // dd($params);
-        return view('customers.cart.checkout', ['snap_token' => $snapToken],  compact('cart', 'cekongkir', 'cityName', 'getServices', 'provinceName', 'userAddress', 'getUsersProvince', 'getUsersCity'));
+        return view('customers.cart.checkout', ['snap_token' => $snapToken],  compact('cart', 'getCoupon', 'cekongkir', 'cityName', 'getServices', 'provinceName', 'userAddress', 'getUsersProvince', 'getUsersCity'));
     }
 
     public function store(Request $request)
     {
         $user = Auth::user();
+        // return dd($user->id);
         $json = json_decode($request->get('json'));
         $cart = session()->get('cart');
         $orders = new Order();
@@ -101,12 +109,13 @@ class CheckoutProductController extends Controller
         $orders->no_handphone = $user->phone;
         $orders->alamat = $user->address;
         $orders->tanggal_orders = Carbon::now();
-        $orders->ongkos_kirim = $request->ongkos_kirim;
+        $orders->ongkos_kirim = $request->  _kirim;
         $orders->status = 'Sedang Diproses';
         $orders->ekspedisi = $request->courierService;
         $orders->jenis_pembayaran = $json->payment_type;
+        $orders->potongan_kupon = $request->potongan_kupon;
         $orders->total = $request->grandTotal;
-        $saved =  $orders->save();
+        $orders->save();
         foreach ($cart as $item) {
             $details = new OrderDetail();
             $details->product_id = $item['id'];
@@ -126,7 +135,7 @@ class CheckoutProductController extends Controller
                 );
         }
         session()->forget('cart');
-        return redirect('/history-order')->with('success', 'Produk berhasil di order');
+        return redirect('/riwayat-pesanan')->with('success', 'Produk berhasil di order');
     }
     /**
      * Show the form for creating a new resource.

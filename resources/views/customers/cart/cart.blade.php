@@ -130,12 +130,14 @@
                         <input type="hidden" value="{{ Auth::user()->province_id }}" name="province">
                         <div>
                             <label class=" font-semibold inline-block mb-3 text-sm uppercase mt-4">Shipping</label>
-                            <select class="block p-2 text-gray-600 w-full text-sm" name="courier">
+                            <select class="block p-2 text-gray-600 w-full text-sm" name="courier" id="payment-type">
                                 @foreach ($ekspedisi as $item)
                                     <option value="{{ $item->name }}">{{ $item->name }}</option>
                                 @endforeach
+                                <option value="Ambil Ditempat">Ambil Ditempat</option>
+
                             </select>
-                            <select class="block p-2 text-gray-600 w-full text-sm mt-4" name="service">
+                            <select class="block p-2 text-gray-600 w-full text-sm mt-4" name="service" id="services">
                                 <option value="OKE">OKE (4-5 Hari)</option>
                                 <option value="REG">REG (2-3 Hari)</option>
                             </select>
@@ -143,25 +145,21 @@
                         <div class="py-4">
                             <label for="promo" class="font-semibold inline-block mb-3 text-sm uppercase">Promo
                                 Code</label>
-                            <select class="block p-2 text-gray-600 w-full text-sm" name="kupon">
+                            <select class="block p-2 text-gray-600 w-full text-sm" name="coupon">
                                 @if ($kupons != null)
                                     @foreach ($kupons as $item)
-                                        <option value="{{ $item->potongan }}">{{ $item->kode_kupon }}</option>
+                                        <option value="{{ $item->potongan }}">{{ $item->kode_kupon }} - Potongan
+                                            @currency($item->potongan)</option>
                                     @endforeach
                                 @else
                                     <option value="Tidak Pakai Kupon">Kupon Tidak Tersedia</option>
                                 @endif
                             </select>
                         </div>
-                        <button
-                            class="bg-white hover:bg-primary hover:text-white px-5 py-2 text-sm text-secondary uppercase">Apply</button>
-                        {{-- <div class="flex justify-between mt-10 mb-5">
-                        <span class="font-semibold text-sm uppercase">Subtotal</span>
-                        <span class="font-semibold text-sm">@currency($c['subtotal'])</span>
-                    </div> --}}
+
                         <div class="border-t mt-8">
                             <div class="flex font-semibold justify-between py-6 text-sm uppercase">
-                                <span>Total</span>
+                                <span>Sub Total</span>
                                 <span>@currency($subtotal)</span>
                             </div>
                         </div>
@@ -183,7 +181,7 @@
     </div>
     <input type="checkbox" id="my_modal_7" class="modal-toggle" />
     <div class="modal">
-        <form method="POST" class="modal-box" action="{{ route('cart.update', ['id' => Auth::user()->id]) }}"
+        <form method="POST" class="modal-box" action="{{ route('cart.updateAddress', ['id' => Auth::user()->id]) }}"
             enctype="multipart/form-data">
             @csrf
             <h3 class="font-bold text-lg">Tambah Alamat</h3>
@@ -237,13 +235,22 @@
     </div>
 @endsection
 @section('script')
-    {{-- <script type="text/javascript">
-        $(document).ready(function() {
-            $(document).on('click', '.btn-checkout', function() {
-                if ({{ $userAddress }} = '') {
-                    alert('Harap Masukkan Alamat');
-                }
-            });
+    <script type="text/javascript">
+        // $(document).ready(function() {
+        //     $(document).on('click', '.btn-checkout', function() {
+        //         if ({{ $userAddress }} = '') {
+        //             alert('Harap Masukkan Alamat');
+        //         }
+        //     });
+        // });
+        $("#payment-type").change(function() {
+            // alert('asd');
+            var control = $(this);
+            if (control.val() == 'Ambil Ditempat') {
+                $("#services").hide();
+            } else {
+                $("#services").show();
+            }
         });
-    </script> --}}
+    </script>
 @endsection

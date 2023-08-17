@@ -3,17 +3,22 @@
     <section class="py-8 rounded-b-xl pb-40">
         <div class="container mx-auto items-center flex flex-wrap pt-4 pb-12">
             <div class=" flex w-full">
+
                 <div class="md:w-3/12 md:mx-2 ">
-                    <div class="bg-white p-3 border-2 border-secondary rounded-xl">
+                    <div class="bg-white p-3 border-2 border-secondary rounded-xl ">
+                        <div class="h-60 m-2  rounded-full border overflow-hidden ">
+                            <img src="https://avatars3.githubusercontent.com/u/2763884?s=128" alt="Avatar"
+                                class="h-full w-full" />
+                        </div>
                         <h1 class=" font-bold text-xl leading-8 my-1">{{ Auth::user()->name }}</h1>
                         <p class="text-sm  leading-6"><span class="font-bold">Nomor Handphone : </span>
                             {{ Auth::user()->phone }}</p>
-                        <p class="text-sm leading-6"><span class="font-bold">Alamat : </span>{{ Auth::user()->address }}</p>
+                        <p class="text-sm leading-6"><span class="font-bold">Alamat : </span>{{ Auth::user()->address }}
+                        </p>
                         <span class="flex text-secondary hover:text-primary text-sm underline">
                             <label for="my_modal_7">Ubah Alamat </label>
                         </span>
                     </div>
-                    <div class="my-4"></div>
                 </div>
                 <div class="w-full md:w-9/12 mx-2 h-64 mb-14">
                     <div class="bg-white p-3 shadow-sm border-2 border-secondary rounded-xl">
@@ -35,7 +40,7 @@
                                         </p>
                                     </div>
                                     <div class="w-1/2">
-                                        <h2 class="text-xl font-medium font-semibold ">@currency($item->total)</h2>
+                                        <h2 class="text-xl font-semibold ">@currency($item->total)</h2>
                                     </div>
                                     <div class="text-lg font-semibold">
                                         <a href="/detail-pesanan/{{ $item->orderdetail->order_id }}"

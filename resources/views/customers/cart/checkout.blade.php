@@ -24,7 +24,7 @@
             foreach ($cart as $key => $value) {
                 $total += $value['subtotal'];
             }
-            $grandTotal = $total + $cekongkir;
+            $grandTotal = $total + $cekongkir - $getCoupon;
             // echo $grandTotal;
         }
     @endphp
@@ -77,12 +77,18 @@
                 <h1 class="font-semibold text-2xl border-b pb-8">Informasi Pembayaran</h1>
                 <div class="flex justify-between mt-10 mb-5">
                     <span class="font-semibold text-sm uppercase">Ekspedisi</span>
-                    @if ($getServices == 'OKE')
-                        <span class="font-semibold text-sm">JNE - OKE (4-5 Hari)</span>
+                    @if ($cekongkir == 0)
+                        <span class="font-semibold text-sm">Ambil Ditempat</span>
                     @else
-                        <span class="font-semibold text-sm">JNE - REG (2-3 Hari)</span>
+                        @if ($getServices == 'OKE')
+                            <span class="font-semibold text-sm">JNE - OKE (4-5 Hari)</span>
+                        @else
+                            <span class="font-semibold text-sm">JNE - REG (2-3 Hari)</span>
+                        @endif
                     @endif
+
                 </div>
+
                 <div class="flex justify-between mt-10 mb-5">
                     <span class="font-semibold text-sm uppercase">Ongkos Kirim</span>
                     <span class="font-semibold text-sm">@currency($cekongkir)</span>
@@ -91,13 +97,19 @@
                     <span class="font-semibold text-sm uppercase">Subtotal</span>
                     <span class="font-semibold text-sm">@currency($total)</span>
                 </div>
+                @if ($getCoupon != null)
+                    <div class="flex justify-between mt-10 mb-5">
+                        <span class="font-semibold text-sm uppercase">Potongan Kupon</span>
+                        <span class="font-semibold text-sm"> - @currency($getCoupon)</span>
+                    </div>
+                @endif
                 <div class="border-t mt-8">
                     <div class="flex font-semibold justify-between py-6 text-sm uppercase">
                         <span>Total</span>
                         <span>@currency($grandTotal)</span>
                     </div>
                     <button id="pay-button"
-                    class="pay bg-white font-semibold py-3 text-sm hover:bg-primary hover:text-white text-secondary uppercase w-full">Checkout</button>
+                        class="pay bg-white font-semibold py-3 text-sm hover:bg-primary hover:text-white text-secondary uppercase w-full">Checkout</button>
                 </div>
             </div>
         </div>
@@ -109,6 +121,7 @@
         <input type="hidden" value="{{ $grandTotal }}" name="grandTotal">
         <input type="hidden" value="{{ $getServices }}" name="courierService">
         <input type="hidden" value="{{ $cekongkir }}" name="ongkos_kirim">
+        <input type="hidden" value="{{ $getCoupon }}" name="potongan_kupon">
     </form>
 @endsection
 @section('script')

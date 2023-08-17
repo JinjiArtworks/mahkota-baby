@@ -25,11 +25,14 @@
         <div class="navbar-center hidden lg:flex justify-center text-white">
             <ul class="menu menu-horizontal px-1">
                 <li><a href="/">Home</a></li>
-                <li><a href="/products">Produk Kami</a></li>
-                <li><a>Item 3</a></li>
-                <li><a>Item 4</a></li>
+                <li><a href="/products">Belanja</a></li>
+                <li><a href="/category">Kategori</a></li>
+                <li><a href="/informasi-produk">Tentang Produk Kami</a></li>
+                {{-- <li><a>Item 3</a></li>
+                <li><a>Item 4</a></li> --}}
             </ul>
         </div>
+
         <div class="flex-none">
             <div class="dropdown dropdown-end">
                 <label tabindex="0" class="btn btn-ghost btn-circle">
@@ -78,20 +81,20 @@
                             class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                             <li><a href="" class="font-bold">{{ Auth::user()->name }}</li></a>
                             <li>
-                                <a href="/profile" class="justify-between">
-                                    Profile
+                                <a href="/chat" class="justify-between">
+                                    Obrolan
                                 </a>
                             </li>
                             <li><a href="/riwayat-pesanan">Pesanan</a></li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <li><button type="submit">Logout</button></li>
+                                <li><button type="submit">Logasout</button></li>
                             </form>
                         </ul>
                     @else
                         <ul tabindex="0"
                             class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><a href="">Lihat Toko</a></li>
+                            <li><a href="/admin-dashboard">Lihat Toko</a></li>
                             <li><a>Settings</a></li>
                             <li><a>Logout</a></li>
                         </ul>
@@ -103,7 +106,6 @@
                         <li><a href="/register">Register</a></li>
                     </ul>
                 @endif
-
             </div>
         </div>
     </div>
@@ -156,4 +158,3 @@
 </body>
 
 </html>
-

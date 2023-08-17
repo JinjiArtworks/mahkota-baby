@@ -10,10 +10,6 @@ class Order extends Model
     use HasFactory;
     protected $guarded = ['id'];
     protected $table = 'pesanans';
-    public function customer()
-    {
-        return $this->hasMany(Customer::class);
-    }
     public function orderdetail()
     {
         return $this->hasOne(OrderDetail::class);

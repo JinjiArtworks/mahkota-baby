@@ -16,7 +16,11 @@ class Product extends Model
     }
     public function coupon()
     {
-        return $this->belongsTo(Categories::class);
+        return $this->belongsTo(Coupon::class);
+    }
+    public function detailproduk()
+    {
+        return $this->hasOne(DetailProduk::class);
     }
     public function orderdetail()
     {

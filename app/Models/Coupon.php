@@ -12,6 +12,6 @@ class Coupon extends Model
     protected $guarded = [];
     public function product()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasOne(Product::class);
     }
 }

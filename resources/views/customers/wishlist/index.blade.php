@@ -15,12 +15,13 @@
                     </div>
                     <div class="my-4"></div>
                 </div>
-                <div class="w-full md:w-9/12 mx-2 h-64 mb-14">
+
+                <div class="w-full">
                     <div class="bg-white p-3 shadow-sm border-2 border-secondary rounded-xl">
                         <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mx-4">
                             <span class="tracking-wide text-xl underline my-3">Wishlist</span>
                         </div>
-                        @foreach ($wishlist as $item)
+                        @foreach ($getWishlist as $item)
                             <div class="p-3 w-full">
                                 <div class="flex items-center justify-between border gap-6 p-4 border-gray-200 rounded-xl">
                                     <div class="w-28">
@@ -34,74 +35,79 @@
                                                 class="text-primary">{{ $item->product->stok }} pcs</span>
                                         </p>
                                     </div>
-
+                                    
                                     <div class="text-lg font-semibold">
                                         <a href="/detail-product/{{ $item->product_id }}"
                                             class="text-white bg-secondary hover:bg-primary rounded-xl text-sm px-5 py-2.5 text-center">
                                             Lihat Produk</a>
                                     </div>
+                                    <div class="mr-4">
+                                        <form action="{{ route('wishlist.remove', ['id' => $item->product_id]) }}"
+                                            method="GET">
+                                            <input type="hidden" name="products" value="{{ $item->product_id }}">
+                                            <button type="submit" class="mt-4">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
                         @endforeach
-
-                        {{-- <a href="/detail-pesanan/{{ $item->orderdetail->order_id }}" --}}
-                        {{-- <a href="/detail-pesanan/{{ $item->orderdetail->order_id }}" 
-                        class="block w-full  text-sm font-semibold bg-secondary text-white rounded-lg hover:bg-primary hover:shadow-xs p-3 my-4">
-                        Ubah Informasi
-                    </a> --}}
                     </div>
+                    {{-- <a href="/detail-pesanan/{{ $item->orderdetail->order_id }}" --}}
+                    {{-- <a href="/detail-pesanan/{{ $item->orderdetail->order_id }}" 
+                            class="block w-full  text-sm font-semibold bg-secondary text-white rounded-lg hover:bg-primary hover:shadow-xs p-3 my-4">
+                            Ubah Informasi
+                        </a> --}}
                 </div>
             </div>
-        </div>
-        <input type="checkbox" id="my_modal_7" class="modal-toggle" />
-        <div class="modal">
-            <form method="POST" class="modal-box" action="{{ route('cart.updateAddress', ['id' => Auth::user()->id]) }}"
-                enctype="multipart/form-data">
-                @csrf
-                <h3 class="font-bold text-lg">Tambah Alamat</h3>
-                <label class="label">
-                    <span class="label-text">Alamat</span>
-                </label>
-                <input type="text" placeholder="Type here" required name="address"
-                    class="block p-2 text-gray-600 w-full text-sm" value="{{ Auth::user()->address }}" />
+            <input type="checkbox" id="my_modal_7" class="modal-toggle" />
+            <div class="modal">
+                <form method="POST" class="modal-box"
+                    action="{{ route('cart.updateAddress', ['id' => Auth::user()->id]) }}" enctype="multipart/form-data">
+                    @csrf
+                    <h3 class="font-bold text-lg">Tambah Alamat</h3>
+                    <label class="label">
+                        <span class="label-text">Alamat</span>
+                    </label>
+                    <input type="text" placeholder="Type here" required name="address"
+                        class="block p-2 text-gray-600 w-full text-sm" value="{{ Auth::user()->address }}" />
 
-                <label class="label">
-                    <span class="label-text">Provinsi</span>
-                </label>
-                <select class="block p-2 text-gray-600 w-full text-sm" name="province">
-                    @if ($getUsersProvince == null)
-                        @foreach ($allProvince as $item)
-                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                        @endforeach
-                    @else
-                        <option value="{{ $getUsersProvince }}">{{ $province->name }}</option>
-                        @foreach ($allProvince as $item)
-                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                        @endforeach
-                    @endif
-                </select>
+                    <label class="label">
+                        <span class="label-text">Provinsi</span>
+                    </label>
+                    <select class="block p-2 text-gray-600 w-full text-sm" name="province">
+                        @if ($getUsersProvince == null)
+                            @foreach ($allProvince as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        @else
+                            <option value="{{ $getUsersProvince }}">{{ $province->name }}</option>
+                            @foreach ($allProvince as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        @endif
+                    </select>
 
-                <label class="label">
-                    <span class="label-text">Kota</span>
-                </label>
-                <select class="block p-2 text-gray-600 w-full text-sm" name="city">
-                    @if ($getUsersCity == null)
-                        @foreach ($allCities as $item)
-                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                        @endforeach
-                    @else
-                        <option value="{{ $getUsersCity }}">{{ $city->name }}</option>
-                        @foreach ($allCities as $item)
-                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                        @endforeach
-                    @endif
-                </select>
-                <button class="mt-4 btn-checkout rounded-xl font-semibold py-3 text-sm text-white uppercase w-full"
-                    style="background:#ef9fbc" type="submit">Konfirmasi
-                </button>
-            </form>
-            <label class="modal-backdrop" for="my_modal_7">Close</label>
-        </div>
+                    <label class="label">
+                        <span class="label-text">Kota</span>
+                    </label>
+                    <select class="block p-2 text-gray-600 w-full text-sm" name="city">
+                        @if ($getUsersCity == null)
+                            @foreach ($allCities as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        @else
+                            <option value="{{ $getUsersCity }}">{{ $city->name }}</option>
+                            @foreach ($allCities as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                    <button class="mt-4 btn-checkout rounded-xl font-semibold py-3 text-sm text-white uppercase w-full"
+                        style="background:#ef9fbc" type="submit">Konfirmasi
+                    </button>
+                </form>
+                <label class="modal-backdrop" for="my_modal_7">Close</label>
+            </div>
     </section>
-
 @endsection

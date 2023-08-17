@@ -35,14 +35,20 @@
                 <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                     <div class="flex justify-between">
                         <h1 class="text-3xl title-font font-medium mb-1">{{ $products->nama }}</h1>
+                        {{-- @foreach ($wishlist as $item)
+                            @if ($products->id == $item->product_id)
+                                Sudah ada di wishlist
+                            @elseif ($item == null) --}}
                         <form action="{{ route('products.addToWishlist', ['id' => $products->id]) }}" method="POST">
                             @csrf
-                            <input type="hidden" name="products" value="{{ $products->id }}">
                             <button
-                                class="rounded-full w-10 h-10 ml-auto bg-secondary p-0 border-0 text-white hover:bg-primary ">
+                                class="add-wishlist rounded-full w-10 h-10 ml-auto bg-secondary p-0 border-0 text-white hover:bg-primary ">
                                 <i class="fa-regular text-white text-lg fa-heart"></i>
                             </button>
                         </form>
+                        {{-- @endif
+                        @endforeach --}}
+
                     </div>
                     {{-- Stars --}}
                     <div class="flex mb-4">
@@ -114,18 +120,10 @@
                     <form action="{{ route('cart.add', ['id' => $products->id]) }}" method="POST">
                         @csrf
                         <div class="flex mt-6 items-center border-gray-200 ">
-                            {{-- <div class="flex">
-                            <span class="mr-3">Color</span>
-                            <button class="border-2 border-gray-300 rounded-full w-6 h-6 focus:outline-none"></button>
-                            <button
-                                class="border-2 border-gray-300 ml-1 bg-gray-700 rounded-full w-6 h-6 focus:outline-none"></button>
-                            <button
-                                class="border-2 border-gray-300 ml-1 bg-red-500 rounded-full w-6 h-6 focus:outline-none"></button>
-                        </div> --}}
                             <div class="flex items-center">
                                 <span class="mr-3">Size</span>
                                 <div class="relative">
-                                    @if ($products->size == 'All Size')
+                                    @if ($products->ukuran == 'All Size')
                                         <select name="size"
                                             class="rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-red-500 text-base pl-3 pr-10">
                                             <option value="S">S</option>
@@ -136,7 +134,7 @@
                                     @else
                                         <select
                                             class="rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-red-500 text-base pl-3 pr-10">
-                                            <option value="{{ $products->size }}">{{ $products->size }}</option>
+                                            <option value="{{ $products->ukuran }}">{{ $products->ukuran }}</option>
                                         </select>
                                     @endif
 
@@ -174,9 +172,7 @@
                             @else
                                 <span class="title-font font-medium text-2xl text-gray-900">@currency($products->harga)</span>
                             @endif
-
                         </div>
-
                         <button
                             class=" add-to-cart px-4 py-4 rounded-lg my-4 text-sm bg-secondary p-0 border-0 text-white hover:bg-primary inline-flex justify-center items-center">
                             Masukkan Keranjang
@@ -215,25 +211,23 @@
                     })
                 }
             });
-        });
-    </script>
 
-    <script>
-        $('.addWishlist').click(function(event) {
-            event.preventDefault();
-            var form = $(this).closest("form");
-            Swal.fire({
-                title: 'Masukkan Kedalam Wishlist?',
-                icon: 'info',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
-            })
         });
+        // $('.add-wishlist').click(function(event) {
+        //     event.preventDefault();
+        //     var form = $(this).closest("form");
+        //     Swal.fire({
+        //         title: 'Masukkan Kedalam Wishlist?',
+        //         icon: 'info',
+        //         showCancelButton: true,
+        //         confirmButtonColor: '#3085d6',
+        //         cancelButtonColor: '#d33',
+        //         confirmButtonText: 'Yes'
+        //     }).then((result) => {
+        //         if (result.isConfirmed) {
+        //             form.submit();
+        //         }
+        //     })
+        // });
     </script>
 @endsection
