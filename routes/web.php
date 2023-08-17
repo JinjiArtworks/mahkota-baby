@@ -10,7 +10,9 @@ use App\Http\Controllers\Customers\ProductController;
 use App\Http\Controllers\Customers\RiwayatPesananController;
 use App\Http\Controllers\Customers\WishlistController;
 use App\Http\Controllers\Admin\ListProductController;
+use App\Http\Controllers\Admin\ResourcesController;
 use App\Http\Controllers\Admin\VendorController;
+use App\Http\Controllers\Customers\CategoryController;
 use App\Http\Controllers\Customers\ChatController;
 use App\Http\Controllers\Customers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +41,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/belanja', [ProductController::class, 'search'])->name('search');
         Route::get('/informasi-produk', [ProductController::class, 'infoProduct'])->name('infoProduct');
         // Route::get('/belanja', [ProductController::class, 'searchByCat'])->name('searchByCat');
+    });
+    Route::group(['as' => 'categories.'], function () {
+        Route::get('category', [CategoryController::class, 'index'])->name('index');
+        Route::get('/detail-category/{id}', [CategoryController::class, 'detail']);
     });
     Route::group(['as' => 'wishlist.'], function () {
         Route::get('/wishlist', [WishlistController::class, 'index'])->name('index');
@@ -102,6 +108,14 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['as' => 'chats.'], function () {
         Route::get('/chat-admin', [AdminChatController::class, 'index'])->name('index');
         Route::post('/send-chat-admin', [AdminChatController::class, 'sendAdminMsg'])->name('adminMsg');
+    });
+    Route::group(['as' => 'resources.'], function () {
+        Route::get('/admin-resources', [ResourcesController::class, 'index'])->name('index');
+        // Route::get('create-resources', [CouponController::class, 'create'])->name('create');
+        // Route::get('edit-resources/{id}', [CouponController::class, 'edit'])->name('edit');
+        // Route::post('store-resources', [CouponController::class, 'store'])->name('store');
+        // Route::put('update-resources/{id}', [CouponController::class, 'update'])->name('update');
+        // Route::get('delete-resources/{id}', [CouponController::class, 'destroy'])->name('delete');
     });
 });
 Route::get('/checkout', function () {
