@@ -1,5 +1,4 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
-
 module.exports = {
     content: [
         "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
@@ -39,5 +38,6 @@ module.exports = {
             },
         ],
     },
-    plugins: [require("daisyui")],
+
+    plugins: [require("daisyui@2.33")],
 };

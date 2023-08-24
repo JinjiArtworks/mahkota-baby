@@ -14,4 +14,8 @@ class DetailProduk extends Model
     {
         return $this->belongsTo(Product::class);
     }
+    public function alergi()
+    {
+        return $this->belongsTo(Alergi::class);
+    }
 }

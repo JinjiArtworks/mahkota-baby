@@ -11,14 +11,14 @@ class CouponController extends Controller
     public function index()
     {
         $coupon = Coupon::get();
-        return view('admin.listCoupons.index', compact('coupon'));
+        return view('admin.listResources.kupons.index', compact('coupon'));
     }
     // Add vendor
     public function create()
     {
         $coupon = Coupon::all();
         // return dd($categories);
-        return view('admin.listCoupons.create', compact('coupon'));
+        return view('admin.listResources.kupons.create', compact('coupon'));
     }
     public function store(Request $request)
     {
@@ -28,12 +28,12 @@ class CouponController extends Controller
             'tanggal_berlaku' => $request->kuponBerlaku,
             'tanggal_berakhir' => $request->kuponBerakhir,
         ]);
-        return redirect('/admin-kupons')->with('success', 'Kupon berhasil ditambahkan');
+        return redirect('/add-kupons')->with('success', 'Kupon berhasil ditambahkan');
     }
     public function edit($id)
     {
         $coupon = Coupon::find($id);
-        return view('admin.listCoupons.edit', compact('coupon'));
+        return view('admin.listResources.kupons.edit', compact('coupon'));
     }
     public function update(Request $request, $id)
     {
@@ -46,7 +46,7 @@ class CouponController extends Controller
                     'tanggal_berakhir' => $request->kuponBerakhir,
                 ]
             );
-        return redirect('/admin-kupons')->with('success', 'Kupon berhasil diubah.');
+        return redirect('/add-kupons')->with('success', 'Kupon berhasil diubah.');
     }
     public function destroy($id)
     {

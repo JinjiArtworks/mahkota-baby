@@ -28,6 +28,7 @@
                 <li><a href="/products">Belanja</a></li>
                 <li><a href="/category">Kategori</a></li>
                 <li><a href="/informasi-produk">Tentang Produk Kami</a></li>
+                <li><a href="/faq">FAQ</a></li>
                 {{-- <li><a>Item 3</a></li>
                 <li><a>Item 4</a></li> --}}
             </ul>

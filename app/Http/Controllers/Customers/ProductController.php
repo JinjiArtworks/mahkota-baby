@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Customers;
 
+use App\Models\Alergi;
 use App\Models\Categories;
 use App\Models\DetailProduk;
 use Illuminate\Http\Request;
@@ -31,10 +32,7 @@ class ProductController extends Controller
     public function infoProduct(Request $request)
     {
         $detailProduk = DetailProduk::get();
-        // return dd($detailProduk->product_id);
-        // $products = Product::whereId($detailProduk->product_id)->get();
-        // return dd($products);
-        // return dd($detailProduk->product->nama);
+        // return dd($detailProduk->alergi->nama);
         return view('customers.products.informasi-produk', compact('detailProduk'));
     }
     public function addToWishlist(Request $request)

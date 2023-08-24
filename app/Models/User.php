@@ -47,6 +47,7 @@ class User extends Authenticatable
     {
         return $this->belongsTo(City::class, 'city_id');
     }
+    
     public function reviews()
     {
         return $this->belongsTo(Review::class);
@@ -54,5 +55,9 @@ class User extends Authenticatable
     public function wishlist()
     {
         return $this->hasOne(Wishlist::class);
+    }
+    public function faq()
+    {
+        return $this->hasMany(Faq::class);
     }
 }

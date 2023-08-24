@@ -44,7 +44,8 @@
                                 <th class="py-2 px-4 border border-gray-300 w-40 font-semibold">Nama Produk</th>
                                 <th class="py-2 px-4 border border-gray-300 font-normal">
                                     <span class="flex justify-between">{{ $item->product->nama }}
-                                        <a href="/detail-product/{{ $item->product->id }}" class="badge badge-secondary text-white text-xs ">Lihat Produk </a>
+                                        <a href="/detail-product/{{ $item->product->id }}"
+                                            class="badge badge-secondary text-white text-xs ">Lihat Produk </a>
                                     </span>
                                 </th>
                             </tr>
@@ -66,14 +67,34 @@
                                 </th>
                             </tr>
                             <tr>
-                                <th class="py-2 px-4 border-l border-b border-gray-300 w-40 font-normal"></th>
+                                <th class="py-2 px-4 border-l  border-gray-300 w-40 font-normal"></th>
                                 <th class="py-2 px-4 border border-gray-300 w-40 font-semibold">Kandungan</th>
                                 <th class="py-2 px-4 border border-gray-300 font-normal leading-5">{{ $item->kandungan }}
                                 </th>
                             </tr>
+                            <tr>
+                                <th class="py-2 px-4 border-l border-b border-gray-300 w-40 font-normal"></th>
+                                <th class="py-2 px-4 border border-gray-300 w-40 font-semibold">Alergi</th>
+                                @if ($item->alergi != null)
+                                    <th class="py-2 px-4 border border-gray-300 font-normal leading-5">
+                                        Alergi terhadap <b>{{ $item->alergi->nama }}</b>
+                                        <ul>
+                                            <li>
+                                                - {{ $item->alergi->deskripsi }}
+                                            </li>
+                                            <li>
+                                                - {{ $item->alergi->efek }}
+                                            </li>
+                                        </ul>
+                                    </th>
+                                @else
+                                    <th class="py-2 px-4 border border-gray-300 font-normal leading-5">
+                                        Tidak ada kandungan alergi.
+                                    </th>
+                                @endif
+                            </tr>
                         </table>
                     @endforeach
-
                 </div>
             </nav>
         </div>

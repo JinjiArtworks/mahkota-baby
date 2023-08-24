@@ -4,34 +4,36 @@
         <!-- Start Recent Sales -->
         <div class="card col-span-2 xl:col-span-1  rounded-xl">
             <div class="card-header flex justify-between">
-                <p class="text-2xl text-black ">Daftar Kupon</p>
-                <a href="/create-kupons" class="btn-shadow ">Tambah Kupon</a>
+                <p class="text-2xl text-black ">Daftar Deskripsi Produk</p>
+                <a href="/create-detail-produk" class="btn-shadow ">Tambah Deskripsi Produk</a>
             </div>
-            <table class="table-auto w-full text-left text-sm">
+            <table class="table-auto w-full text-left text-xs">
                 <thead>
                     <tr class="">
-                        <th class="p-4">Kode Kupon</th>
-                        <th class="p-4">Potongan</th>
-                        <th class="p-4">Tanggal Berlaku</th>
-                        <th class="p-4">Tanggal Berakhir</th>
+                        <th class="p-4">Nama Produk</th>
+                        <th class="p-4">Brand</th>
+                        <th class="p-4">Bahan</th>
+                        <th class="p-4">Deskripsi</th>
+                        <th class="p-4">Kandungan</th>
                     </tr>
                 </thead>
-                @foreach ($coupon as $item)
+                @foreach ($detailsProduct as $item)
                     <tbody>
                         <tr>
-                            <td class="p-4 font-semibold">#{{ $item->kode_kupon }}</td>
-                            <td class="p-4">@currency($item->potongan)</td>
-                            <td class="p-4">{{ $item->tanggal_berlaku }}</td>
-                            <td class="p-4">{{ $item->tanggal_berakhir }}</td>
+                            <td class="p-4 ">{{ $item->product->nama }}</td>
+                            <td class="p-4">{{ $item->brand }}</td>
+                            <td class="p-4">{{ $item->bahan }}</td>
+                            <td class="p-4 leading-6 ">{{ $item->deskripsi }} </td>
+                            <td class="p-4 leading-6">{{ $item->kandungan }}</td>
                             <td class="p-4">
-                                <form action="{{ route('kupons.edit', ['id' => $item->id]) }}">
+                                <form action="{{ route('resources.edit', ['id' => $item->id]) }}">
                                     <button type="submit"">
                                         <i class="far fa-edit ml-2 mt-3 text-blue-600"></i>
                                     </button>
                                 </form>
                             </td>
                             <td class="p-4">
-                                <form method="GET" action="{{ route('kupons.delete', ['id' => $item->id]) }}">
+                                <form method="GET" action="{{ route('resources.delete', ['id' => $item->id]) }}">
                                     <button type="submit" class="deleteProduk">
                                         <i class="far fa-trash-alt ml-2 mt-3 text-red-600"></i>
                                     </button>

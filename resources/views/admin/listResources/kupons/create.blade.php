@@ -4,23 +4,21 @@
         <!-- Start Recent Sales -->
         <div class="card col-span-2 xl:col-span-1">
             <div class="card-header flex justify-between">
-                <p class="text-2xl text-black ">Ubah Kupon</p>
+                <p class="text-2xl text-black ">Tambah Kupon</p>
             </div>
             <div class="p-6">
-                <form method="POST"
-                    action="{{ route('kupons.update', ['id' => $coupon->id]) }} "enctype="multipart/form-data">
+                <form method="POST" action="/store-kupons" enctype="multipart/form-data">
                     @csrf
-                    {{ method_field('put') }}
                     <div class="mb-4">
                         <label for="kodeKupon" class="block mb-2 text-sm font-medium text-gray-900 ">Kode Kupon</label>
-                        <input type="number" name="kodeKupon" min="1" value="{{ $coupon->kode_kupon }}"
+                        <input type="number" name="kodeKupon" min="1"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  w-full p-3"
                             placeholder="Masukkan Kode Kupon Produk" required>
                     </div>
                     <div class="mb-4">
                         <label for="potonganKupon" class="block mb-2 text-sm font-medium text-gray-900 ">Potongan
                         </label>
-                        <input type="number" name="potonganKupon" value="{{ $coupon->potongan }}" min="1" oninput="this.value = Math.abs(this.value)"
+                        <input type="number" name="potonganKupon" min="1" oninput="this.value = Math.abs(this.value)"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  w-full p-3"
                             placeholder="Masukkan Potongan Kupon" required>
                     </div>
@@ -29,14 +27,14 @@
                         </label>
                         <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  w-full p-3""
                             name="kuponBerlaku" required type="date" placeholder="Tanggal Berlaku" aria-label="date"
-                            max="<?= date('Y-m-d') ?>" value="{{ $coupon->tanggal_berlaku }}">
+                            max="<?= date('Y-m-d') ?>" value="<?php echo date('Y-m-d'); ?>">
                     </div>
                     <div class="mb-4">
                         <label for="kuponBerakhir" class="block mb-2 text-sm font-medium text-gray-900 ">Tanggal Berakhir
                         </label>
                         <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  w-full p-3""
                             name="kuponBerakhir" required type="date" placeholder="Tanggal Berakhir" aria-label="date"
-                            value="{{ $coupon->tanggal_berakhir }}">
+                            value="<?php echo date('Y-m-d'); ?>">
                     </div>
                     <button type="submit"
                         class="text-white btn-shadow hover:bg-green-400  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2 ">Submit</button>

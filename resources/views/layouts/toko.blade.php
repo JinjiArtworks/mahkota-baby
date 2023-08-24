@@ -216,11 +216,11 @@
                 <div class="flex flex-col">
                     <p class="uppercase text-xs text-gray-600 mb-4 tracking-wider">homes</p>
                     {{-- @if (Auth::user()->roles == 'Super Admin') --}}
-                        <a href="/admin-dashboard"
-                            class="mb-3 capitalize  text-sm mt-2 hover:text-teal-700 transition ease-in-out duration-500">
-                            <i class="fad fa-shopping-cart text-xs mr-2"></i>
-                            ecommerce dashboard
-                        </a>
+                    <a href="/admin-dashboard"
+                        class="mb-3 capitalize  text-sm mt-2 hover:text-teal-700 transition ease-in-out duration-500">
+                        <i class="fad fa-shopping-cart text-xs mr-2"></i>
+                        ecommerce dashboard
+                    </a>
                     {{-- @endif --}}
                     @if (Auth::user()->roles == 'Staff')
                         <a href="/admin-products"
@@ -228,8 +228,12 @@
                             <i class="far fa-tshirt text-xs mr-2"></i>
                             Daftar Produk
                         </a>
-                    @endif
-                    @if (Auth::user()->roles == 'Super Admin')
+                    @elseif (Auth::user()->roles == 'Super Admin')
+                        <a href="/admin-products"
+                            class="mb-3 text-sm mt-4 hover:text-teal-700 transition ease-in-out duration-500">
+                            <i class="far fa-tshirt text-xs mr-2"></i>
+                            Daftar Produk
+                        </a>
                         <a href="/admin-products"
                             class="mb-3 text-sm mt-4 hover:text-teal-700 transition ease-in-out duration-500">
                             <i class="far fa-clipboard-list mr-2"></i>
@@ -240,17 +244,31 @@
                             <i class="far fa-clipboard-list mr-2"></i>
                             Pesanan Vendor
                         </a>
-                        <a href="/admin-kupons"
-                            class="mb-3 text-sm mt-4 hover:text-teal-700 transition ease-in-out duration-500">
-                            <i class="far fa-clipboard-list mr-2"></i>
-                            Data Kupon
-                        </a>
-                    @endif
-                    @if (Auth::user()->roles == 'Admin')
                         <a href="/admin-resources"
                             class="mb-3 text-sm mt-4 hover:text-teal-700 transition ease-in-out duration-500">
                             <i class="far fa-clipboard-list mr-2"></i>
                             Data Resources
+                        </a>
+                        <a href="/admin-faq"
+                            class="mb-3 text-sm mt-4 hover:text-teal-700 transition ease-in-out duration-500">
+                            <i class="far fa-clipboard-list mr-2"></i>
+                            FAQ
+                        </a>
+                        {{-- <a href="/admin-kupons"
+                            class="mb-3 text-sm mt-4 hover:text-teal-700 transition ease-in-out duration-500">
+                            <i class="far fa-clipboard-list mr-2"></i>
+                            Data Kupon
+                        </a> --}}
+                    @elseif (Auth::user()->roles == 'Admin')
+                        <a href="/admin-resources"
+                            class="mb-3 text-sm mt-4 hover:text-teal-700 transition ease-in-out duration-500">
+                            <i class="far fa-clipboard-list mr-2"></i>
+                            Data Resources
+                        </a>
+                        <a href="/admin-faq"
+                            class="mb-3 text-sm mt-4 hover:text-teal-700 transition ease-in-out duration-500">
+                            <i class="far fa-clipboard-list mr-2"></i>
+                            FAQ
                         </a>
                     @endif
                 </div>

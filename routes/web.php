@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminChatController;
 use App\Http\Controllers\Admin\Resources\CouponController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Customers\CartController;
 use App\Http\Controllers\Customers\CheckoutProductController;
 use App\Http\Controllers\Customers\HomeController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Customers\ProductController;
 use App\Http\Controllers\Customers\RiwayatPesananController;
 use App\Http\Controllers\Customers\WishlistController;
 use App\Http\Controllers\Admin\ListProductController;
+use App\Http\Controllers\Admin\Resources\DetailsProductController;
 use App\Http\Controllers\Admin\ResourcesController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Customers\CategoryController;
@@ -29,6 +31,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/faq', [HomeController::class, 'faq'])->name('faq');
+
+Route::get('/informasi-produk', [ProductController::class, 'infoProduct'])->name('infoProduct');
+
 Route::group(['as' => 'nav.'], function () {
     Route::get('/products', [ProductController::class, 'index'])->name('shop');
     Route::get('/detail-product/{id}', [ProductController::class, 'detail']);
@@ -39,7 +45,6 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['as' => 'products.'], function () {
         Route::post('/store-wishlist', [ProductController::class, 'addToWishlist'])->name('addToWishlist');
         Route::get('/belanja', [ProductController::class, 'search'])->name('search');
-        Route::get('/informasi-produk', [ProductController::class, 'infoProduct'])->name('infoProduct');
         // Route::get('/belanja', [ProductController::class, 'searchByCat'])->name('searchByCat');
     });
     Route::group(['as' => 'categories.'], function () {
@@ -72,6 +77,14 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/send-review/{id}', [RiwayatPesananController::class, 'storeReview'])->name('review');
         Route::post('/accept-item/{id}', [RiwayatPesananController::class, 'acceptOrder'])->name('acceptOrder');
     });
+    Route::group(['as' => 'faq.'], function () {
+        // Route::get('create-faq', [HomeController::class, 'create'])->name('create');
+        Route::get('edit-faq/{id}', [HomeController::class, 'edit'])->name('edit');
+        Route::post('store-faq', [HomeController::class, 'store'])->name('store');
+        Route::put('update-faq/{id}', [HomeController::class, 'update'])->name('update');
+        Route::get('delete-faq/{id}', [HomeController::class, 'destroy'])->name('delete');
+
+    });
 });
 
 
@@ -97,25 +110,38 @@ Route::middleware(['auth'])->group(function () {
         Route::put('update-vendors/{id}', [VendorController::class, 'update'])->name('update');
         Route::get('delete-vendors/{id}', [VendorController::class, 'destroy'])->name('delete');
     });
-    Route::group(['as' => 'kupons.'], function () {
-        Route::get('/admin-kupons', [CouponController::class, 'index'])->name('index');
-        Route::get('create-kupons', [CouponController::class, 'create'])->name('create');
-        Route::get('edit-kupons/{id}', [CouponController::class, 'edit'])->name('edit');
-        Route::post('store-kupons', [CouponController::class, 'store'])->name('store');
-        Route::put('update-kupons/{id}', [CouponController::class, 'update'])->name('update');
-        Route::get('delete-kupons/{id}', [CouponController::class, 'destroy'])->name('delete');
-    });
     Route::group(['as' => 'chats.'], function () {
         Route::get('/chat-admin', [AdminChatController::class, 'index'])->name('index');
         Route::post('/send-chat-admin', [AdminChatController::class, 'sendAdminMsg'])->name('adminMsg');
     });
     Route::group(['as' => 'resources.'], function () {
         Route::get('/admin-resources', [ResourcesController::class, 'index'])->name('index');
+
+        Route::get('/add-kupons', [CouponController::class, 'index'])->name('index');
+        Route::get('create-kupons', [CouponController::class, 'create'])->name('create');
+        Route::get('edit-kupons/{id}', [CouponController::class, 'edit'])->name('edit');
+        Route::post('store-kupons', [CouponController::class, 'store'])->name('store');
+        Route::put('update-kupons/{id}', [CouponController::class, 'update'])->name('update');
+        Route::get('delete-kupons/{id}', [CouponController::class, 'destroy'])->name('delete');
+
+        Route::get('/add-detail-produk', [DetailsProductController::class, 'index'])->name('index');
+        Route::get('create-detail-produk', [DetailsProductController::class, 'create'])->name('create');
+        Route::get('edit-detail-produk/{id}', [DetailsProductController::class, 'edit'])->name('edit');
+        Route::post('store-detail-produk', [DetailsProductController::class, 'store'])->name('store');
+        Route::put('update-detail-produk/{id}', [DetailsProductController::class, 'update'])->name('update');
+        Route::get('delete-detail-produk/{id}', [DetailsProductController::class, 'destroy'])->name('delete');
         // Route::get('create-resources', [CouponController::class, 'create'])->name('create');
         // Route::get('edit-resources/{id}', [CouponController::class, 'edit'])->name('edit');
         // Route::post('store-resources', [CouponController::class, 'store'])->name('store');
         // Route::put('update-resources/{id}', [CouponController::class, 'update'])->name('update');
         // Route::get('delete-resources/{id}', [CouponController::class, 'destroy'])->name('delete');
+    });
+    Route::group(['as' => 'admin-faq.'], function () {
+        Route::get('admin-faq', [FaqController::class, 'index'])->name('index');
+        Route::get('edit-faq/{id}', [FaqController::class, 'edit'])->name('edit');
+        Route::post('store-faq/{id}', [FaqController::class, 'store'])->name('store');
+        Route::put('update-faq/{id}', [FaqController::class, 'update'])->name('update');
+        Route::get('delete-faq/{id}', [FaqController::class, 'destroy'])->name('delete');
     });
 });
 Route::get('/checkout', function () {
