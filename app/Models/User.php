@@ -50,11 +50,15 @@ class User extends Authenticatable
     
     public function reviews()
     {
-        return $this->belongsTo(Review::class);
+        return $this->hasMany(Review::class);
+    }
+    public function alergis()
+    {
+        return $this->hasOne(UserAlergi::class);
     }
     public function wishlist()
     {
-        return $this->hasOne(Wishlist::class);
+        return $this->hasMany(Wishlist::class);
     }
     public function faq()
     {

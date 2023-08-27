@@ -17,7 +17,7 @@
 @endsection
 @section('content')
     <!-- The button to open modal -->
-    {{-- <label for="my_modal_6" class="btn">open modal</label>
+    <label for="my_modal_6" class="btn">open modal</label>
     <input type="checkbox" id="my_modal_6" class="modal-toggle" />
     <div class="modal">
         <div class="modal-box">
@@ -27,7 +27,7 @@
                 <label for="my_modal_6" class="btn">Close!</label>
             </div>
         </div>
-    </div> --}}
+    </div>
     <section class="bg-white py-4 rounded-b-xl my-10 rounded-xl">
         <div class="container mx-auto flex items-center flex-wrap  pb-12">
             <nav id="store" class="w-full z-30 top-0 px-6 py-1">

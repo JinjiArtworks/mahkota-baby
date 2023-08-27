@@ -5,18 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Review extends Model
+class UserAlergi extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $table = 'ulasans';
+    protected $table = 'users_alergi';
 
     public function users()
     {
         return $this->belongsTo(User::class);
-    }
-    public function products()
-    {
-        return $this->hasOne(Product::class);
     }
 }
