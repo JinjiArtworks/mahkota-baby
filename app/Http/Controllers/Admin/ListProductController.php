@@ -31,7 +31,7 @@ class ListProductController extends Controller
         $categories = Categories::all();
         $coupons = Coupon::all();
         // return dd($categories);
-        return view('admin.listProduct.create', compact('product', 'categories','coupons'));
+        return view('admin.listProduct.create', compact('product', 'categories', 'coupons'));
     }
     public function store(Request $request)
     {
@@ -40,13 +40,13 @@ class ListProductController extends Controller
             $request->productImage->move(public_path($destinationPath), $request->productImage->getClientOriginalName());
             Product::create([
                 'nama' => $request->productName,
+                'usia' => $request->usia,
                 'deskripsi' => $request->productDesc,
                 'harga' => $request->productPrice,
                 'stok' => $request->productStock,
                 'ukuran' => $request->productSize,
                 'berat' => $request->productWeight,
                 'categories_id' => $request->productCategories,
-                'coupons_id' => $request->productCoupon,
                 'gambar' => $request->productImage->getClientOriginalName(),
                 'terjual' => 0,
                 'diskon' => $request->productDisc,
@@ -60,7 +60,7 @@ class ListProductController extends Controller
         $categories = Categories::all();
         $coupons = Coupon::all();
         $getCouponsProducts = Coupon::whereId($products->coupons_id)->first();
-        return view('admin.listProduct.edit', compact('products', 'categories','coupons','getCouponsProducts'));
+        return view('admin.listProduct.edit', compact('products', 'categories', 'coupons', 'getCouponsProducts'));
     }
     public function update(Request $request, $id)
     {
@@ -71,12 +71,12 @@ class ListProductController extends Controller
                 [
                     'nama' => $request->productName,
                     'deskripsi' => $request->productDesc,
+                    'usia' => $request->usia,
                     'harga' => $request->productPrice,
                     'stok' => $request->productStock,
                     'ukuran' => $request->productSize,
                     'berat' => $request->productWeight,
                     'categories_id' => $request->productCategories,
-                    'coupons_id' => $request->productCoupon,
                     'gambar' => $request->productImage->getClientOriginalName(),
                     'terjual' => 0,
                     'diskon' => $request->productDisc,

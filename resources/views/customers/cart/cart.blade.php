@@ -165,7 +165,7 @@
                         </div>
                         @if (Auth::user()->address != null)
                             <button type="submit"
-                                class="btn-checkoutrounded-xl bg-white font-semibold py-3 text-sm hover:bg-primary hover:text-white text-secondary uppercase w-full">Checkout
+                                class="btn-checkout rounded-xl bg-white font-semibold py-3 text-sm hover:bg-primary hover:text-white text-secondary uppercase w-full">Checkout
                             </button>
                         @else
                             <button type="submit"
@@ -227,7 +227,7 @@
                     @endforeach
                 @endif
             </select>
-            <button class="mt-4 btn-checkout rounded-xl font-semibold py-3 text-sm text-white uppercase w-full"
+            <button class="confirm mt-4 btn-checkout rounded-xl font-semibold py-3 text-sm text-white uppercase w-full"
                 style="background:#ef9fbc" type="submit">Konfirmasi
             </button>
         </form>
@@ -241,8 +241,57 @@
         //         if ({{ $userAddress }} = '') {
         //             alert('Harap Masukkan Alamat');
         //         }
+
         //     });
         // });
+        $('.deleteCart').click(function(event) {
+            event.preventDefault();
+            var form = $(this).closest("form");
+            Swal.fire({
+                title: 'Hapus Produk Dari Keranjang?',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+        $('.confirm').click(function(event) {
+            event.preventDefault();
+            var form = $(this).closest("form");
+            Swal.fire({
+                title: 'Konfirmasi Alamat?',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+        $('.btn-checkout').click(function(event) {
+            event.preventDefault();
+            var form = $(this).closest("form");
+            Swal.fire({
+                title: 'Checkout Produk?',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
         $("#payment-type").change(function() {
             // alert('asd');
             var control = $(this);

@@ -3,33 +3,7 @@
     <div class="text-sm breadcrumbs mt-4">
         <ul>
             <li>
-                <a>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        class="w-4 h-4 mr-2 stroke-current">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
-                    </svg>
-                    Home
-                </a>
-            </li>
-            <li>
-                <a>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        class="w-4 h-4 mr-2 stroke-current">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
-                    </svg>
-                    Documents
-                </a>
-            </li>
-            <li>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                    class="w-4 h-4 mr-2 stroke-current">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
-                    </path>
-                </svg>
-                Add Document
+                Home
             </li>
         </ul>
     </div>
@@ -39,8 +13,8 @@
         <div class="carousel relative container mx-auto rounded-xl" style="max-width:1600px;">
             <div class="carousel-inner relative overflow-hidden w-full">
                 <!--Slide 1-->
-                <input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true"
-                    hidden="" checked="checked">
+                <input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden=""
+                    checked="checked">
                 <div class="carousel-item absolute opacity-0" style="height:50vh;">
                     <div class="h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right"
                         style="background-image: url('https://images.unsplash.com/photo-1422190441165-ec2956dc9ecc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80');">

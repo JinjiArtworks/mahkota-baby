@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="{{ asset('css/tailwind.output.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.js"></script>
     <title>Welcome To Cleopatra</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css">
 </head>
 
 <body class="bg-gray-100">

@@ -49,7 +49,7 @@
                     </div>
                     <div class="mb-4">
                         <label for="productPrice" class="block mb-2 text-sm font-medium text-gray-900 ">Harga Produk
-                            
+
                         </label>
                         <input type="number" name="productPrice"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  w-full p-3"
@@ -63,7 +63,7 @@
                             placeholder="Masukkan Quantity Produk">
                     </div>
                     <button type="submit"
-                        class="text-white btn-shadow hover:bg-green-400  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2 ">Submit</button>
+                        class="confirm text-white btn-shadow hover:bg-green-400  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2 ">Submit</button>
                 </form>
 
             </div>
@@ -78,5 +78,23 @@
                 blah.src = URL.createObjectURL(file)
             }
         }
+    </script>
+    <script>
+        $('.confirm').click(function(event) {
+            event.preventDefault();
+            var form = $(this).closest("form");
+            Swal.fire({
+                title: 'Konfirmasi Vendor?',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
     </script>
 @endsection

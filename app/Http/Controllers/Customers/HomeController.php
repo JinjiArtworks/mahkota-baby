@@ -32,9 +32,8 @@ class HomeController extends Controller
      */
     public function faq()
     {
-        $user_id = Auth::user()->id;
         $faq = Faq::all();
-        return view('customers.faq.index', compact('faq','user_id'));
+        return view('customers.faq.index', compact('faq'));
     }
     public function store(Request $request)
     {

@@ -35,6 +35,16 @@
                         </select>
                     </div>
                     <div class="mb-4">
+                        <label for="usia" class="block mb-2 text-sm font-medium text-gray-900 ">Kategori Usia
+                        </label>
+                        <select id="usia" name="usia"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-3">
+                            <option value="1-2 Tahun">1-2 Tahun</option>
+                            <option value="3-5 Tahun">3-5 Tahun</option>
+                            <option value="5-10 Tahun">5-10 Tahun</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
                         <label for="productSize" class="block mb-2 text-sm font-medium text-gray-900 ">Ukuran
                             Produk
                         </label>
@@ -53,6 +63,16 @@
                         </label>
                         <textarea type="text"name="productDesc" placeholder="Masukkan Deskripsi Produk"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  w-full p-3"></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label for="usia" class="block mb-2 text-sm font-medium text-gray-900 ">Kategori Usia
+                        </label>
+                        <select id="usia" name="usia"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-3">
+                            <option value="1-2 Tahun">1-2 Tahun</option>
+                            <option value="3-5 Tahun">3-5 Tahun</option>
+                            <option value="5-10 Tahun">5-10 Tahun</option>
+                        </select>
                     </div>
                     <div class="mb-4">
                         <label for="productStock" class="block mb-2 text-sm font-medium text-gray-900 ">Stok
@@ -88,21 +108,9 @@
                             placeholder="Masukkan Berat Produk" required>
                         <small>*Berat normal produk yaitu 300g / Produk</small>
                     </div>
-                    <div class="mb-4">
-                        <label for="productCoupon" class="block mb-2 text-sm font-medium text-gray-900 ">Kupon
-                            Produk
-                        </label>
-                        <select id="countries" name="productCoupon"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-3">
-                            <option value="">Tidak Ada Kupon </option>
-                            @foreach ($coupons as $item)
-                                <option value="{{ $item->id }}">Kode: #{{ $item->kode_kupon }} - Potongan :
-                                    @currency($item->potongan)</option>
-                            @endforeach
-                        </select>
-                    </div>
+                  
                     <button type="submit"
-                        class="text-white btn-shadow hover:bg-green-400  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2 ">Submit</button>
+                        class="confirm text-white btn-shadow hover:bg-green-400  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2 ">Submit</button>
                 </form>
 
             </div>
@@ -117,5 +125,23 @@
                 blah.src = URL.createObjectURL(file)
             }
         }
+    </script>
+    <script>
+        $('.confirm').click(function(event) {
+            event.preventDefault();
+            var form = $(this).closest("form");
+            Swal.fire({
+                title: 'Konfirmasi Produk?',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
     </script>
 @endsection

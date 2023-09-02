@@ -23,11 +23,19 @@
                     <a class=" tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl " href="#">
                         Frequently Asked Question (FAQ)
                         <div class="flex transform hover:text-blue-500 ">
-                            <a href="/faq-create">
-                                <p class="text-md p-2 flex items-center ml-5 text-secondary underline">
-                                    <label for="modal_question"> + Kirim Pertanyaan </label>
-                                </p>
-                            </a>
+                            @if (Auth::check())
+                                <a href="/faq-create">
+                                    <p class="text-md p-2 flex items-center ml-5 text-secondary underline">
+                                        <label for="modal_question"> + Kirim Pertanyaan </label>
+                                    </p>
+                                </a>
+                            @else
+                                <a href="/login">
+                                    <p class="text-md p-2 flex items-center ml-5 text-secondary underline">
+                                        <label> Login untuk mengirim pertanyaan </label>
+                                    </p>
+                                </a>
+                            @endif
                         </div>
                     </a>
                     @foreach ($faq as $item)
@@ -87,10 +95,30 @@
             <textarea type="text" placeholder="Type here" required name="pertanyaan"
                 class="block p-2 text-gray-600 w-full text-sm"></textarea>
 
-            <button class="mt-4 btn-checkout rounded-xl font-semibold py-3 text-sm text-white uppercase w-full"
+            <button class="confirm mt-4 btn-checkout rounded-xl font-semibold py-3 text-sm text-white uppercase w-full"
                 style="background:#ef9fbc" type="submit">Konfirmasi
             </button>
         </form>
         <label class="modal-backdrop" for="modal_question">Close</label>
     </div>
+@endsection
+@section('script')
+    <script>
+        $('.confirm').click(function(event) {
+            event.preventDefault();
+            var form = $(this).closest("form");
+            Swal.fire({
+                title: 'Kirim Pertanyaan?',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
 @endsection

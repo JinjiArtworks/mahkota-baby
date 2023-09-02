@@ -110,7 +110,7 @@
             </div>
         </div>
 
-        <div class="card mt-6">
+        {{-- <div class="card mt-6">
             <div class="card-body">
                 <div class="flex flex-row justify-between items-center">
                     <h1 class="font-extrabold text-lg">best sellers</h1>
@@ -173,7 +173,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> --}}
         <div class="card mt-6">
             <div class="card-body">
                 <h2 class="font-bold text-lg p-4">Daftar Pesanan Selesai</h2>

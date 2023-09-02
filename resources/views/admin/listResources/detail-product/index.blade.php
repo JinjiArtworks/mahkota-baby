@@ -34,7 +34,7 @@
                             </td>
                             <td class="p-4">
                                 <form method="GET" action="{{ route('resources.delete', ['id' => $item->id]) }}">
-                                    <button type="submit" class="deleteProduk">
+                                    <button type="submit" class="delete-confirm">
                                         <i class="far fa-trash-alt ml-2 mt-3 text-red-600"></i>
                                     </button>
                                 </form>
@@ -46,4 +46,24 @@
         </div>
     </div>
     <!-- End Recent Sales -->
+@endsection
+@section('script')
+    <script>
+        $('.delete-confirm').click(function(event) {
+            event.preventDefault();
+            var form = $(this).closest("form");
+            Swal.fire({
+                title: 'Hapus Data?',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
 @endsection

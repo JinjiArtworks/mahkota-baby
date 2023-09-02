@@ -213,21 +213,21 @@
             });
 
         });
-        // $('.add-wishlist').click(function(event) {
-        //     event.preventDefault();
-        //     var form = $(this).closest("form");
-        //     Swal.fire({
-        //         title: 'Masukkan Kedalam Wishlist?',
-        //         icon: 'info',
-        //         showCancelButton: true,
-        //         confirmButtonColor: '#3085d6',
-        //         cancelButtonColor: '#d33',
-        //         confirmButtonText: 'Yes'
-        //     }).then((result) => {
-        //         if (result.isConfirmed) {
-        //             form.submit();
-        //         }
-        //     })
-        // });
+        $('.add-wishlist').click(function(event) {
+            event.preventDefault();
+            var form = $(this).closest("form");
+            Swal.fire({
+                title: 'Masukkan Kedalam Wishlist?',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            })
+        });
     </script>
 @endsection

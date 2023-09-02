@@ -35,7 +35,7 @@
                                                 class="text-primary">{{ $item->product->stok }} pcs</span>
                                         </p>
                                     </div>
-                                    
+
                                     <div class="text-lg font-semibold">
                                         <a href="/detail-product/{{ $item->product_id }}"
                                             class="text-white bg-secondary hover:bg-primary rounded-xl text-sm px-5 py-2.5 text-center">
@@ -45,7 +45,7 @@
                                         <form action="{{ route('wishlist.remove', ['id' => $item->product_id]) }}"
                                             method="GET">
                                             <input type="hidden" name="products" value="{{ $item->product_id }}">
-                                            <button type="submit" class="mt-4">
+                                            <button type="submit" class="mt-4 delete-wishlist">
                                                 <i class="fa-solid fa-trash"></i>
                                             </button>
                                         </form>
@@ -103,11 +103,47 @@
                             @endforeach
                         @endif
                     </select>
-                    <button class="mt-4 btn-checkout rounded-xl font-semibold py-3 text-sm text-white uppercase w-full"
+                    <button class="mt-4 btn-confirm rounded-xl font-semibold py-3 text-sm text-white uppercase w-full"
                         style="background:#ef9fbc" type="submit">Konfirmasi
                     </button>
                 </form>
                 <label class="modal-backdrop" for="my_modal_7">Close</label>
             </div>
     </section>
+@endsection
+@section('script')
+    <script>
+        $('.btn-confirm').click(function(event) {
+            event.preventDefault();
+            var form = $(this).closest("form");
+            Swal.fire({
+                title: 'Konfirmasi Alamat?',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+        $('.delete-wishlist').click(function(event) {
+            event.preventDefault();
+            var form = $(this).closest("form");
+            Swal.fire({
+                title: 'Hapus Dari Wishlist?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
 @endsection

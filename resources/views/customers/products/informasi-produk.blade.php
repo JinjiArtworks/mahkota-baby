@@ -30,7 +30,7 @@
     </div>
     <section class="bg-white py-4 rounded-b-xl my-10 rounded-xl">
         <div class="container mx-auto flex items-center flex-wrap  pb-12">
-            <nav id="store" class="w-full z-30 top-0 px-6 py-1">
+            <nav id="store" class="flex w-full z-30 top-0 px-6 py-1">
                 <div class="w-full container mx-auto flex flex-wrap items-center justify-between px-2 py-3">
                     <a class=" tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl " href="#">
                         Detail Produk Kami

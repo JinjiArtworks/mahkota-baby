@@ -9,7 +9,7 @@
                         <form method="POST" action="{{ route('dashboard.update', ['id' => $orders->id]) }}">
                             @csrf
                             {{ method_field('put') }}
-                            <button type="submit" class=" btn-shadow text-xs text-black">Kirim Pesanan</button>
+                            <button type="submit" class="send-order btn-shadow text-xs text-black">Kirim Pesanan</button>
                         </form>
                     @endif
                 </div>
@@ -56,4 +56,24 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script>
+        $('.send-order').click(function(event) {
+            event.preventDefault();
+            var form = $(this).closest("form");
+            Swal.fire({
+                title: 'Kirim Pesanan?',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
 @endsection

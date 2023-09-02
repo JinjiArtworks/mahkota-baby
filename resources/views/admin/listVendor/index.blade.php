@@ -33,7 +33,7 @@
                             <td class=" p-3">@currency($item->harga)</td>
                             <td class=" p-3">{{ $item->quantity }}</td>
                             <td class=" p-3">@currency($item->total_pengeluaran)</td>
-                            <td class=" p-3">{{  $item->catatan}}</td>
+                            <td class=" p-3">{{ $item->catatan }}</td>
                             <td class=" p-3">
                                 <form action="{{ route('vendors.edit', ['id' => $item->id]) }}">
                                     <button type="submit"">
@@ -43,7 +43,7 @@
                             </td>
                             <td class="p-4">
                                 <form method="GET" action="{{ route('vendors.delete', ['id' => $item->id]) }}">
-                                    <button type="submit" class="deleteProduk">
+                                    <button type="submit" class="deleteVendor">
                                         <i class="far fa-trash-alt ml-2 mt-3 text-red-600"></i>
                                     </button>
                                 </form>
@@ -55,4 +55,24 @@
         </div>
     </div>
     <!-- End Recent Sales -->
+@endsection
+@section('script')
+    <script>
+        $('.deleteVendor').click(function(event) {
+            event.preventDefault();
+            var form = $(this).closest("form");
+            Swal.fire({
+                title: 'Hapus Data Vendor?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
 @endsection

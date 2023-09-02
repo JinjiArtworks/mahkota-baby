@@ -31,22 +31,44 @@
                             placeholder="Masukkan Brand Produk" required>
                     </div>
                     <div class="mb-4">
-                        <label for="deskripsi" class="block mb-2 text-sm font-medium text-gray-900 ">Deskripsi Produk</label>
+                        <label for="deskripsi" class="block mb-2 text-sm font-medium text-gray-900 ">Deskripsi
+                            Produk</label>
                         <textarea type="text" name="deskripsi" min="1"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  w-full p-3"
                             placeholder="Masukkan Deskripsi Produk" required></textarea>
                     </div>
                     <div class="mb-4">
-                        <label for="kandungan" class="block mb-2 text-sm font-medium text-gray-900 ">Kandungan Produk</label>
+                        <label for="kandungan" class="block mb-2 text-sm font-medium text-gray-900 ">Kandungan
+                            Produk</label>
                         <textarea type="text" name="kandungan" min="1"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  w-full p-3"
                             placeholder="Masukkan Kandungan Produk" required></textarea>
                     </div>
                     <button type="submit"
-                        class="text-white btn-shadow hover:bg-green-400  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2 ">Submit</button>
+                        class="confirm text-white btn-shadow hover:bg-green-400  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2 ">Submit</button>
                 </form>
 
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script>
+        $('.confirm').click(function(event) {
+            event.preventDefault();
+            var form = $(this).closest("form");
+            Swal.fire({
+                title: 'Konfirmasi Data?',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
 @endsection

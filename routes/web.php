@@ -11,6 +11,7 @@ use App\Http\Controllers\Customers\ProductController;
 use App\Http\Controllers\Customers\RiwayatPesananController;
 use App\Http\Controllers\Customers\WishlistController;
 use App\Http\Controllers\Admin\ListProductController;
+use App\Http\Controllers\Admin\Resources\AddCategoriesController;
 use App\Http\Controllers\Admin\Resources\DetailsProductController;
 use App\Http\Controllers\Admin\ResourcesController;
 use App\Http\Controllers\Admin\VendorController;
@@ -83,7 +84,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('store-faq', [HomeController::class, 'store'])->name('store');
         Route::put('update-faq/{id}', [HomeController::class, 'update'])->name('update');
         Route::get('delete-faq/{id}', [HomeController::class, 'destroy'])->name('delete');
-
     });
 });
 
@@ -118,11 +118,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/admin-resources', [ResourcesController::class, 'index'])->name('index');
 
         Route::get('/add-kupons', [CouponController::class, 'index'])->name('index');
-        Route::get('create-kupons', [CouponController::class, 'create'])->name('create');
-        Route::get('edit-kupons/{id}', [CouponController::class, 'edit'])->name('edit');
-        Route::post('store-kupons', [CouponController::class, 'store'])->name('store');
-        Route::put('update-kupons/{id}', [CouponController::class, 'update'])->name('update');
-        Route::get('delete-kupons/{id}', [CouponController::class, 'destroy'])->name('delete');
+        Route::get('create-kupons', [CouponController::class, 'create'])->name('create-kupons');
+        Route::get('edit-kupons/{id}', [CouponController::class, 'edit'])->name('edit-kupons');
+        Route::post('store-kupons', [CouponController::class, 'store'])->name('store-kupons');
+        Route::put('update-kupons/{id}', [CouponController::class, 'update'])->name('update-kupons');
+        Route::get('delete-kupons/{id}', [CouponController::class, 'destroy'])->name('delete-kupons');
 
         Route::get('/add-detail-produk', [DetailsProductController::class, 'index'])->name('index');
         Route::get('create-detail-produk', [DetailsProductController::class, 'create'])->name('create');
@@ -130,11 +130,14 @@ Route::middleware(['auth'])->group(function () {
         Route::post('store-detail-produk', [DetailsProductController::class, 'store'])->name('store');
         Route::put('update-detail-produk/{id}', [DetailsProductController::class, 'update'])->name('update');
         Route::get('delete-detail-produk/{id}', [DetailsProductController::class, 'destroy'])->name('delete');
-        // Route::get('create-resources', [CouponController::class, 'create'])->name('create');
-        // Route::get('edit-resources/{id}', [CouponController::class, 'edit'])->name('edit');
-        // Route::post('store-resources', [CouponController::class, 'store'])->name('store');
-        // Route::put('update-resources/{id}', [CouponController::class, 'update'])->name('update');
-        // Route::get('delete-resources/{id}', [CouponController::class, 'destroy'])->name('delete');
+
+
+        Route::get('/add-kategori', [AddCategoriesController::class, 'index'])->name('index');
+        Route::get('create-kategori', [AddCategoriesController::class, 'create'])->name('create-kategori');
+        Route::get('edit-kategori/{id}', [AddCategoriesController::class, 'edit'])->name('edit-kategori');
+        Route::post('store-kategori', [AddCategoriesController::class, 'store'])->name('store-kategori');
+        Route::put('update-kategori/{id}', [AddCategoriesController::class, 'update'])->name('update-kategori');
+        Route::get('delete-kategori/{id}', [AddCategoriesController::class, 'destroy'])->name('delete-kategori');
     });
     Route::group(['as' => 'admin-faq.'], function () {
         Route::get('admin-faq', [FaqController::class, 'index'])->name('index');

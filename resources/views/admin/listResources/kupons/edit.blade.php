@@ -8,7 +8,7 @@
             </div>
             <div class="p-6">
                 <form method="POST"
-                    action="{{ route('resources.update', ['id' => $coupon->id]) }} "enctype="multipart/form-data">
+                    action="{{ route('resources.update-kupons', ['id' => $coupon->id]) }} "enctype="multipart/form-data">
                     @csrf
                     {{ method_field('put') }}
                     <div class="mb-4">
@@ -39,10 +39,31 @@
                             value="{{ $coupon->tanggal_berakhir }}">
                     </div>
                     <button type="submit"
-                        class="text-white btn-shadow hover:bg-green-400  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2 ">Submit</button>
+                        class="confirm-edit text-white btn-shadow hover:bg-green-400  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2 ">Submit</button>
                 </form>
 
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $('.confirm-edit').click(function(event) {
+            event.preventDefault();
+            var form = $(this).closest("form");
+            Swal.fire({
+                title: 'Konfirmasi Perubahan?',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
 @endsection

@@ -79,7 +79,7 @@
                                     <span class="label-text">Komentar</span>
                                 </label>
                                 <textarea name="comment" class="block p-2 text-gray-600 w-full text-sm" placeholder="Masukkan Komentar"></textarea>
-                                <button class="mt-4 btn-checkout rounded-xl font-semibold p-3 text-xs text-white uppercase "
+                                <button class="confirm mt-4 btn-checkout rounded-xl font-semibold p-3 text-xs text-white uppercase "
                                     style="background:#ef9fbc" type="submit">Konfirmasi
                                 </button>
                             </form>
@@ -93,4 +93,25 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('script')
+    <script>
+        $('.confirm').click(function(event) {
+            event.preventDefault();
+            var form = $(this).closest("form");
+            Swal.fire({
+                title: 'Kirim Review?',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
 @endsection

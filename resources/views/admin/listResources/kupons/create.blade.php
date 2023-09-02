@@ -18,7 +18,8 @@
                     <div class="mb-4">
                         <label for="potonganKupon" class="block mb-2 text-sm font-medium text-gray-900 ">Potongan
                         </label>
-                        <input type="number" name="potonganKupon" min="1" oninput="this.value = Math.abs(this.value)"
+                        <input type="number" name="potonganKupon" min="1"
+                            oninput="this.value = Math.abs(this.value)"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  w-full p-3"
                             placeholder="Masukkan Potongan Kupon" required>
                     </div>
@@ -37,10 +38,30 @@
                             value="<?php echo date('Y-m-d'); ?>">
                     </div>
                     <button type="submit"
-                        class="text-white btn-shadow hover:bg-green-400  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2 ">Submit</button>
+                        class="add-coupon text-white btn-shadow hover:bg-green-400  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2 ">Submit</button>
                 </form>
 
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script>
+        $('.add-coupon').click(function(event) {
+            event.preventDefault();
+            var form = $(this).closest("form");
+            Swal.fire({
+                title: 'Tambah Kupon?',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
 @endsection
