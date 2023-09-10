@@ -53,14 +53,15 @@ class RiwayatPesananController extends Controller
         $reviews = Review::all();
         // return dd($reviews->product_id);
         $user = Auth::user()->id;
-        $orderDetails = OrderDetail::whereOrderId($id)->get();
+        // $checkOrdersComplete = Order::where('status', '=', 'Selesai')->orWhere('status','=','Ajuan Pengembalian Ditolak')->get();
+
+        $orderDetails = OrderDetail::whereProductId($id)->first();
         return view('customers.riwayat.send-review', compact('orderDetails','getIdOrder','reviews'));
     }
     public function storeReview(Request $request, $id)
     {
         $user = Auth::user()->id;
         $reviewsId = Review::get();
-        // return dd($reviewsId->id);
         Review::create([
             'user_id' => $user,
             'tanggal' => Carbon::now(),

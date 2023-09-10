@@ -34,28 +34,29 @@
                         <h3 class="font-semibold text-xs uppercase w-1/5 text-center">Price</h3>
                         <h3 class="font-semibold text-xs uppercase w-1/5 text-center">Total</h3>
                     </div>
-                    @foreach ($orderDetails as $item)
+                    {{-- @foreach ($orderDetails as $item) --}}
+                    {{-- {{ dd($item->product->gambar) }} --}}
                         <div class="flex items-center hover:bg-pink-100 -mx-8 px-6 py-5">
                             <div class="flex w-2/5"> <!-- product -->
                                 <div class="w-28">
-                                    <img class="h-24" src="{{ asset('images/' . $item->product->gambar) }}"
+                                    <img class="h-24" src="{{ asset('images/' . $orderDetails->product->gambar) }}"
                                         alt="">
                                 </div>
                                 <div class="flex flex-col justify-center ml-4 flex-grow">
-                                    <span class="font-bold text-sm">{{ $item->product->nama }}</span>
-                                    <span class="font-normal text-xs">Ukuran : {{ $item->product->ukuran }}</span>
+                                    <span class="font-bold text-sm">{{ $orderDetails->product->nama }}</span>
+                                    <span class="font-normal text-xs">Ukuran : {{ $orderDetails->product->ukuran }}</span>
                                 </div>
                             </div>
-                            <span class="text-center w-1/5 font-semibold text-sm">x{{ $item->qty }}</span>
-                            @if ($item->diskon == null)
-                                <span class="text-center w-1/5 font-semibold text-sm">@currency($item->harga)</span>
+                            <span class="text-center w-1/5 font-semibold text-sm">x{{ $orderDetails->qty }}</span>
+                            @if ($orderDetails->diskon == null)
+                                <span class="text-center w-1/5 font-semibold text-sm">@currency($orderDetails->harga)</span>
                             @else
-                                <span class="text-center w-1/5 font-semibold text-sm">@currency($item->harga - $item->diskon)</span>
+                                <span class="text-center w-1/5 font-semibold text-sm">@currency($orderDetails->harga - $orderDetails->diskon)</span>
                             @endif
-                            <span class="text-center w-1/5 font-semibold text-sm">@currency($item->harga * $item->qty)</span>
+                            <span class="text-center w-1/5 font-semibold text-sm">@currency($orderDetails->harga * $orderDetails->qty)</span>
                         </div>
-                        @if ($item->product->rating == null)
-                            <form method="POST" action="{{ route('history-order.review', ['id' => $item->product_id]) }}"
+                        @if ($orderDetails->product->rating == null)
+                            <form method="POST" action="{{ route('history-order.review', ['id' => $orderDetails->product_id]) }}"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <hr class="mt-4 mb-4">
@@ -88,7 +89,7 @@
                                 <p>Anda sudah memberikan review</p>
                             </div>
                         @endif
-                    @endforeach
+                    {{-- @endforeach --}}
                 </div>
             </div>
         </div>

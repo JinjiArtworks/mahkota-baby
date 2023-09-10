@@ -19,13 +19,12 @@
 @endsection
 @section('content')
     @php
-        $total = 0;
+        $subtotal = 0;
         if ($cart != null) {
             foreach ($cart as $key => $value) {
-                $total += $value['subtotal'];
+                $subtotal += $value['subtotal'];
             }
-            $grandTotal = $total + $cekongkir - $getCoupon;
-            // echo $grandTotal;
+            $grandTotal = $subtotal + $cekongkir - $getCoupon;
         }
     @endphp
     <div class="container mx-auto">
@@ -95,7 +94,7 @@
                 </div>
                 <div class="flex justify-between mt-10 mb-5">
                     <span class="font-semibold text-sm uppercase">Subtotal</span>
-                    <span class="font-semibold text-sm">@currency($total)</span>
+                    <span class="font-semibold text-sm">@currency($subtotal)</span>
                 </div>
                 @if ($getCoupon != null)
                     <div class="flex justify-between mt-10 mb-5">

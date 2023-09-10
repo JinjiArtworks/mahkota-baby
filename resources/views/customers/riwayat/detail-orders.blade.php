@@ -92,7 +92,6 @@
                             <form method="GET"
                                 action="{{ route('history-order.reviewPages', ['id' => $item->product_id]) }}"
                                 enctype="multipart/form-data">
-                                @csrf
                                 <button class="flex text-secondary text-xs hover:text-primary underline">
                                     Review
                                 </button>
