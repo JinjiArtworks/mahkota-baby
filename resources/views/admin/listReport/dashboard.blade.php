@@ -189,11 +189,10 @@
                             <th class="p-4 ">Status</th>
                         </tr>
                     </thead>
-                    @foreach ($orders as $item)
+                    @foreach ($ordersComplete as $item)
                         <tbody>
                             <tr>
                                 <td class="p-4">{{ $item->id }}</td>
-
                                 <td class="p-4 font-bold">{{ $item->tanggal_orders }}</td>
 
                                 @if ($item->jenis_pembayaran == 'bank_transfer')

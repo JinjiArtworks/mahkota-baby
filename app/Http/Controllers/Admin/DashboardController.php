@@ -16,6 +16,7 @@ class DashboardController extends Controller
     public function index()
     {
         $orders = Order::all();
+        $ordersComplete = Order::where('status','=','Selesai')->get();
         $users = Auth::user()->id;
 
         // Total Pesanan
@@ -43,7 +44,7 @@ class DashboardController extends Controller
         // $getReturns = Order::where('status', '=', 'Proses Pengembalian')->get();
         // $totalReturns = $getReturns->count();
         // return dd($totalReturns);
-        return view('admin.listReport.dashboard', compact('orders', 'totalSalesOrders', 'totalClients', 'pendapatanBersih', 'totalCompleteOrders'));
+        return view('admin.listReport.dashboard', compact('orders', 'totalSalesOrders','ordersComplete', 'totalClients', 'pendapatanBersih', 'totalCompleteOrders'));
     }
     public function detail($id)
     {

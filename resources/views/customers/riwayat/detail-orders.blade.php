@@ -39,20 +39,20 @@
                             <form method="POST" action="{{ route('history-order.acceptOrder', ['id' => $getIdOrder]) }}"
                                 enctype="multipart/form-data">
                                 @csrf
-                                <button class="mt-4 btn-checkout rounded-xl font-semibold p-3 text-xs text-white uppercase "
+                                <button class="mt-4 btn-send-item rounded-xl font-semibold p-3 text-xs text-white uppercase "
                                     style="background:#ef9fbc" type="submit">Terima Pesanan
                                 </button>
                             </form>
                         </div>
                     @endif
-                    <div class=" flex justify-end ">
+                    {{-- <div class=" flex justify-end ">
                         @if ($orderStatus->order->status == 'Sedang Dikirim')
                             <a href="/detail-pesanan/{{ $getIdOrder }}"
                                 class="btn btn-sm text-white bg-secondary hover:bg-primary rounded-xl text-sm text-center">
                                 Terima Pesanan</a>
                         @elseif ($orderStatus->order->status == 'Selesai')
                         @endif
-                    </div>
+                    </div> --}}
                     <div class="mt-4 border-b pb-8">
                         <h2 class="font-semibold text-sm text-gray-600">Penerima : <span
                                 class=" font-normal ">{{ Auth::user()->name }}</span></h2>
@@ -164,4 +164,25 @@
             <label class="modal-backdrop" for="my_modal_7">Close</label>
         </div> --}}
     </section>
+@endsection
+
+@section('script')
+    <script>
+        $('.btn-send-item').click(function(event) {
+            event.preventDefault();
+            var form = $(this).closest("form");
+            Swal.fire({
+                title: 'Terima Pesanan?',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
 @endsection
