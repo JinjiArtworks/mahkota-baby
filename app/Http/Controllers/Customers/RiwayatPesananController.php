@@ -53,7 +53,7 @@ class RiwayatPesananController extends Controller
         $reviews = Review::all();
         // return dd($reviews->product_id);
         $user = Auth::user()->id;
-        $orderDetails = OrderDetail::whereProductId($id)->get();
+        $orderDetails = OrderDetail::whereOrderId($id)->get();
         return view('customers.riwayat.send-review', compact('orderDetails','getIdOrder','reviews'));
     }
     public function storeReview(Request $request, $id)
