@@ -48,7 +48,6 @@
                         </form>
                         {{-- @endif
                         @endforeach --}}
-
                     </div>
                     {{-- Stars --}}
                     <div class="flex mb-4">
@@ -111,12 +110,12 @@
                         </span>
                     </div>
                     <p class="leading-relaxed">{{ $products->deskripsi }}</p>
-
                     <div class="my-2">
                         <p class="text-xs leading-relaxed">• Kategori : {{ $products->categories->nama }}</p>
                         <p class="text-xs leading-relaxed">• Stock : {{ $products->stok }} pcs</p>
                         <p class="text-xs leading-relaxed">• Terjual : {{ $products->terjual }} pcs</p>
                     </div>
+
                     <form action="{{ route('cart.add', ['id' => $products->id]) }}" method="POST">
                         @csrf
                         <div class="flex mt-6 items-center border-gray-200 ">
@@ -174,11 +173,54 @@
                             @endif
                         </div>
                         <button
-                            class=" add-to-cart px-4 py-4 rounded-lg my-4 text-sm bg-secondary p-0 border-0 text-white hover:bg-primary inline-flex justify-center items-center">
+                            class="add-to-cart confirm-cart px-4 py-4 rounded-lg my-4 text-sm bg-secondary p-0 border-0 text-white hover:bg-primary inline-flex justify-center items-center">
                             Masukkan Keranjang
                         </button>
                     </form>
                 </div>
+                <table class="table-auto border-collapse w-full text-left text-xs my-6">
+                    <h1 class="mt-4 font-bold text-xl">Informasi Produk</h1>
+                    <tr>
+                        <th class="py-2 px-4 border border-gray-300 w-40 font-semibold">Brand </th>
+                        <th class="py-2 px-4 border border-gray-300 font-normal">{{ $detailProducts->brand }}</th>
+                    </tr>
+                    <tr>
+                        <th class="py-2 px-4 border border-gray-300 w-40 font-semibold">Bahan</th>
+                        <th class="py-2 px-4 border border-gray-300 font-normal">{{ $detailProducts->bahan }}</th>
+                    </tr>
+                    <tr>
+                        <th class="py-2 px-4 border border-gray-300 w-40 font-semibold">Deksripsi</th>
+                        <th class="py-2 px-4 border border-gray-300 font-normal leading-5">
+                            {{ $detailProducts->deskripsi }}
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="py-2 px-4 border border-gray-300 w-40 font-semibold">Kandungan</th>
+                        <th class="py-2 px-4 border border-gray-300 font-normal leading-5">
+                            {{ $detailProducts->kandungan }}
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="py-2 px-4 border border-gray-300 w-40 font-semibold">Alergi</th>
+                        @if ($detailProducts->alergi != null)
+                            <th class="py-2 px-4 border border-gray-300 font-normal leading-5">
+                                Alergi terhadap <b>{{ $detailProducts->alergi->nama }}</b>
+                                <ul>
+                                    <li>
+                                        - {{ $detailProducts->alergi->deskripsi }}
+                                    </li>
+                                    <li>
+                                        - {{ $detailProducts->alergi->efek }}
+                                    </li>
+                                </ul>
+                            </th>
+                        @else
+                            <th class="py-2 px-4 border border-gray-300 font-normal leading-5">
+                                Tidak ada kandungan alergi.
+                            </th>
+                        @endif
+                    </tr>
+                </table>
             </div>
         </div>
     </section>
@@ -228,6 +270,43 @@
                     form.submit();
                 }
             })
+        });
+
+        $('.confirm-cart').click(function(event) {
+            event.preventDefault();
+            var form = $(this).closest("form");
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+            swalWithBootstrapButtons.fire({
+                title: 'Tambahkan Kedalam Keranjang?',
+                text: "Harap cek kandungan alergi terhadap produk ini.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'Cancel',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            })
+            // Swal.fire({
+            //     title: 'Masukkan Kedalam Keranjang? Cek kandungan alergi terhadap produk ini ',
+            //     icon: 'info',
+            //     showCancelButton: true,
+            //     confirmButtonColor: '#3085d6',
+            //     cancelButtonColor: '#d33',
+            //     confirmButtonText: 'Yes'
+            // }).then((result) => {
+            //     if (result.isConfirmed) {
+            //         form.submit();
+            //     }
+            // })
         });
     </script>
 @endsection

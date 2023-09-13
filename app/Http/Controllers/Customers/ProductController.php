@@ -21,12 +21,16 @@ class ProductController extends Controller
     }
     public function detail($id)
     {
+        $getId = $id;
+        // return dd($getId);
         $products = Product::find($id);
+        $detailProducts = DetailProduk::whereProductId($id)->first();
+        // return dd($detailProducts);
         $wishlist = Wishlist::all();
         // return dd($products->id);
         // return dd($wishlist);
         // $getIdProducts = $products->id;
-        return view('customers.products.detail-products', compact('products', 'wishlist'));
+        return view('customers.products.detail-products', compact('products', 'wishlist','detailProducts'));
     }
 
     public function infoProduct(Request $request)

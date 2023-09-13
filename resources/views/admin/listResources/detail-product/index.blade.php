@@ -10,6 +10,7 @@
             <table class="table-auto w-full text-left text-xs">
                 <thead>
                     <tr class="">
+                        <th class="p-4">Gambar Produk</th>
                         <th class="p-4">Nama Produk</th>
                         <th class="p-4">Brand</th>
                         <th class="p-4">Bahan</th>
@@ -20,6 +21,10 @@
                 @foreach ($detailsProduct as $item)
                     <tbody>
                         <tr>
+                            <td class="p-4">
+                                <img src="{{ asset('images/' . $item->product->gambar) }}" class="w-20 h-20 " alt="">
+                            </td>
+
                             <td class="p-4 ">{{ $item->product->nama }}</td>
                             <td class="p-4">{{ $item->brand }}</td>
                             <td class="p-4">{{ $item->bahan }}</td>
