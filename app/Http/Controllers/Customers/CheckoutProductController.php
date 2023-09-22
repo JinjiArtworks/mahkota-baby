@@ -109,7 +109,7 @@ class CheckoutProductController extends Controller
         $orders->no_handphone = $user->phone;
         $orders->alamat = $user->address;
         $orders->tanggal_orders = Carbon::now();
-        $orders->ongkos_kirim = $request->  _kirim;
+        $orders->ongkos_kirim = $request->ongkos_kirim;
         $orders->status = 'Sedang Diproses';
         $orders->ekspedisi = $request->courierService;
         $orders->jenis_pembayaran = $json->payment_type;
@@ -136,60 +136,5 @@ class CheckoutProductController extends Controller
         }
         session()->forget('cart');
         return redirect('/riwayat-pesanan')->with('success', 'Produk berhasil di order');
-    }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

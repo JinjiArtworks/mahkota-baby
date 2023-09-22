@@ -14,4 +14,8 @@ class Alergi extends Model
     {
         return $this->hasOne(DetailProduk::class);
     }
+    public function product()
+    {
+        return $this->hasOne(Alergi::class);
+    }
 }

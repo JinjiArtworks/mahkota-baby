@@ -18,6 +18,10 @@ class Product extends Model
     {
         return $this->belongsTo(Coupon::class);
     }
+    public function alergi()
+    {
+        return $this->belongsTo(Alergi::class);
+    }
     public function detailproduk()
     {
         return $this->hasOne(DetailProduk::class);

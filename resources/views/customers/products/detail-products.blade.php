@@ -202,15 +202,15 @@
                     </tr>
                     <tr>
                         <th class="py-2 px-4 border border-gray-300 w-40 font-semibold">Alergi</th>
-                        @if ($detailProducts->alergi != null)
+                        @if ($products->alergi != null)
                             <th class="py-2 px-4 border border-gray-300 font-normal leading-5">
-                                Alergi terhadap <b>{{ $detailProducts->alergi->nama }}</b>
+                                <b>{{ $products->alergi->nama }}</b>
                                 <ul>
                                     <li>
-                                        - {{ $detailProducts->alergi->deskripsi }}
+                                        - {{ $products->alergi->deskripsi }}
                                     </li>
                                     <li>
-                                        - {{ $detailProducts->alergi->efek }}
+                                        - {{ $products->alergi->efek }}
                                     </li>
                                 </ul>
                             </th>

@@ -42,7 +42,7 @@
                                     <h2 class="text-xl font-semibold ">@currency($item->total)</h2>
                                 </div>
                                 <div class="text-lg font-semibold">
-                                    <a href="/detail-pesanan/{{ $item->orderdetail->order_id }}"
+                                    <a href="/detail-pesanan/{{ $item->id }}"
                                         class="text-white bg-secondary hover:bg-primary rounded-xl text-sm px-5 py-2.5 text-center">
                                         Details</a>
                                 </div>

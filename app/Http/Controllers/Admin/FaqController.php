@@ -28,7 +28,13 @@ class FaqController extends Controller
         $faq = Faq::find($id);
         return view('admin.faq.edit', compact('faq'));
     }
-
+    public function store(Request $request)
+    {
+        Faq::create([
+            'pesan' => $request->pertanyaan,
+        ]);
+        return redirect()->back()->with('success', 'FAQ berhasil ditambahkan');
+    }
     public function update(Request $request,$id)
     {
         Faq::where('id', $id)

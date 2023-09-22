@@ -12,12 +12,14 @@ use App\Http\Controllers\Customers\RiwayatPesananController;
 use App\Http\Controllers\Customers\WishlistController;
 use App\Http\Controllers\Admin\ListProductController;
 use App\Http\Controllers\Admin\Resources\AddCategoriesController;
+use App\Http\Controllers\Admin\Resources\AlergiController;
 use App\Http\Controllers\Admin\Resources\DetailsProductController;
 use App\Http\Controllers\Admin\ResourcesController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Customers\CategoryController;
 use App\Http\Controllers\Customers\ChatController;
 use App\Http\Controllers\Customers\ProfileController;
+use App\Http\Controllers\Admin\ReturnOrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -76,15 +78,17 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/orders-delete/{id}', [RiwayatPesananController::class, 'remove'])->name('delete');
         Route::get('/send-review-rating/{id}', [RiwayatPesananController::class, 'reviewPages'])->name('reviewPages');
         Route::post('/send-review/{id}', [RiwayatPesananController::class, 'storeReview'])->name('review');
+        Route::post('/send-returns/{id}', [RiwayatPesananController::class, 'storeReturns'])->name('returns');
+        Route::post('/send-returns-back/{id}', [RiwayatPesananController::class, 'storeReturnsBack'])->name('sendReturnsBack');
         Route::post('/accept-item/{id}', [RiwayatPesananController::class, 'acceptOrder'])->name('acceptOrder');
     });
-    Route::group(['as' => 'faq.'], function () {
-        // Route::get('create-faq', [HomeController::class, 'create'])->name('create');
-        Route::get('edit-faq/{id}', [HomeController::class, 'edit'])->name('edit');
-        Route::post('store-faq', [HomeController::class, 'store'])->name('store');
-        Route::put('update-faq/{id}', [HomeController::class, 'update'])->name('update');
-        Route::get('delete-faq/{id}', [HomeController::class, 'destroy'])->name('delete');
-    });
+    // Route::group(['as' => 'faq.'], function () {
+    //     // Route::get('create-faq', [HomeController::class, 'create'])->name('create');
+    //     Route::get('edit-faq/{id}', [HomeController::class, 'edit'])->name('edit');
+    //     Route::post('store-faq', [HomeController::class, 'store'])->name('store');
+    //     Route::put('update-faq/{id}', [HomeController::class, 'update'])->name('update');
+    //     Route::get('delete-faq/{id}', [HomeController::class, 'destroy'])->name('delete');
+    // });
 });
 
 
@@ -114,6 +118,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/chat-admin', [AdminChatController::class, 'index'])->name('index');
         Route::post('/send-chat-admin', [AdminChatController::class, 'sendAdminMsg'])->name('adminMsg');
     });
+
+    Route::group(['as' => 'return.'], function () {
+        Route::get('/data-return', [ReturnOrderController::class, 'index'])->name('index');
+        Route::get('/details-return/{id}', [ReturnOrderController::class, 'details'])->name('details');
+        Route::put('/update-return/{id}', [ReturnOrderController::class, 'update'])->name('update');
+        Route::post('/confirm-return/{id}', [ReturnOrderController::class, 'confirmReturn'])->name('confirm');
+        Route::get('/delete-return/{id}', [ReturnOrderController::class, 'destroy'])->name('delete');
+    });
     Route::group(['as' => 'resources.'], function () {
         Route::get('/admin-resources', [ResourcesController::class, 'index'])->name('index');
 
@@ -138,11 +150,19 @@ Route::middleware(['auth'])->group(function () {
         Route::post('store-kategori', [AddCategoriesController::class, 'store'])->name('store-kategori');
         Route::put('update-kategori/{id}', [AddCategoriesController::class, 'update'])->name('update-kategori');
         Route::get('delete-kategori/{id}', [AddCategoriesController::class, 'destroy'])->name('delete-kategori');
+
+
+        Route::get('/add-alergi', [AlergiController::class, 'index'])->name('index');
+        Route::get('create-alergi', [AlergiController::class, 'create'])->name('create-alergi');
+        Route::get('edit-alergi/{id}', [AlergiController::class, 'edit'])->name('edit-alergi');
+        Route::post('store-alergi', [AlergiController::class, 'store'])->name('store-alergi');
+        Route::put('update-alergi/{id}', [AlergiController::class, 'update'])->name('update-alergi');
+        Route::get('delete-alergi/{id}', [AlergiController::class, 'destroy'])->name('delete-alergi');
     });
     Route::group(['as' => 'admin-faq.'], function () {
         Route::get('admin-faq', [FaqController::class, 'index'])->name('index');
         Route::get('edit-faq/{id}', [FaqController::class, 'edit'])->name('edit');
-        Route::post('store-faq/{id}', [FaqController::class, 'store'])->name('store');
+        Route::post('store-faq', [FaqController::class, 'store'])->name('store');
         Route::put('update-faq/{id}', [FaqController::class, 'update'])->name('update');
         Route::get('delete-faq/{id}', [FaqController::class, 'destroy'])->name('delete');
     });

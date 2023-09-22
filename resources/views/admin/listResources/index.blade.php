@@ -31,6 +31,14 @@
                         <h5 class="font-semibold text-gray-900 dark:text-white">Kategori Produk</h5>
                     </div>
                 </div>
+                <div class="m-4 bg-white border border-gray-200 rounded-lg shadow w-48">
+                    <a href="/add-alergi">
+                        <img class=" w-full" src="{{ asset('images/no-profile.png') }}" alt="product image" />
+                    </a>
+                    <div class="flex justify-center mb-4 ">
+                        <h5 class="font-semibold text-gray-900 dark:text-white">Data Alergi Produk</h5>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

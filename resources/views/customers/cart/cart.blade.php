@@ -189,11 +189,11 @@
                 <span class="label-text">Alamat</span>
             </label>
             @if ($userAddress == null)
-                <input type="text" placeholder="Type here" required name="address"
-                    class="block p-2 text-gray-600 w-full text-sm" />
+                <textarea type="text" placeholder="Masukkan Alamat Anda" required name="address"
+                    class=" block p-2 text-gray-600 w-full text-sm"></textarea>
             @else
-                <input type="text" placeholder="Type here" required name="address"
-                    class="block p-2 text-gray-600 w-full text-sm" value="{{ $userAddress }}" />
+                <textarea type="text" placeholder="Masukkan Alamat Anda" required name="address"
+                    class=" block p-2 text-gray-600 w-full text-sm" value="{{ $userAddress }}"></textarea>
             @endif
 
             <label class="label">
@@ -227,7 +227,7 @@
                     @endforeach
                 @endif
             </select>
-            <button class="confirm mt-4 btn-checkout rounded-xl font-semibold py-3 text-sm text-white uppercase w-full"
+            <button class="confirm mt-4 rounded-xl font-semibold py-3 text-sm text-white uppercase w-full"
                 style="background:#ef9fbc" type="submit">Konfirmasi
             </button>
         </form>

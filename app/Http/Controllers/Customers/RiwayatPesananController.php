@@ -36,6 +36,7 @@ class RiwayatPesananController extends Controller
         $getIdOrder = $id;
         $orderDetails = OrderDetail::whereOrderId($id)->get();
         $orderStatus = OrderDetail::whereOrderId($id)->first();
+        $mytime = Carbon::now()->today()->toDateTimeString();
 
         $getUsersCity = Auth::user()->city_id;
         $getUsersProvince = Auth::user()->province_id;
@@ -45,8 +46,44 @@ class RiwayatPesananController extends Controller
 
         // return dd($reviews);
         $mytime = Carbon::now()->today()->toDateTimeString();
-        return view('customers.riwayat.detail-orders', compact('getIdOrder', 'orderDetails', 'city',  'province', 'orderStatus', 'mytime'));
+        return view('customers.riwayat.detail-orders', compact('getIdOrder', 'orderDetails', 'city', 'mytime',  'province', 'orderStatus', 'mytime'));
     }
+    public function storeReturns(Request $request, $id)
+    {
+        // return dd($request->all());
+
+        if ($request->bukti != null) {
+            $destinationPath = '/images';
+            $request->bukti->move(public_path($destinationPath), $request->bukti->getClientOriginalName());
+            Returns::create([
+                'orders_id' => $request->order_id,
+                'tanggal' => Carbon::now(),
+                'alasan' => $request->alasan,
+                'bukti' => $request->bukti->getClientOriginalName(),
+
+            ]);
+            Order::where('id', $id)
+                ->update(
+                    [
+                        'status' => 'Proses Pengembalian'
+                    ]
+                );
+            // return dd($returns);
+
+        }
+        return redirect()->back()->with('Success', 'Ajuan pengembalian telah dikirim');
+    }
+    public function storeReturnsBack($id)
+    {
+        Order::where('id', $id)
+            ->update(
+                [
+                    'status' => 'Pesanan Dikirim Balik Kepada Penjual'
+                ]
+            );
+        return redirect('riwayat-pesanan');
+    }
+
     public function reviewPages($id)
     {
         $getIdOrder = $id;
@@ -56,7 +93,7 @@ class RiwayatPesananController extends Controller
         // $checkOrdersComplete = Order::where('status', '=', 'Selesai')->orWhere('status','=','Ajuan Pengembalian Ditolak')->get();
 
         $orderDetails = OrderDetail::whereProductId($id)->first();
-        return view('customers.riwayat.send-review', compact('orderDetails','getIdOrder','reviews'));
+        return view('customers.riwayat.send-review', compact('orderDetails', 'getIdOrder', 'reviews'));
     }
     public function storeReview(Request $request, $id)
     {

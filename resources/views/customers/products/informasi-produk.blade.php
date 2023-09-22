@@ -16,18 +16,6 @@
     </div>
 @endsection
 @section('content')
-    <!-- The button to open modal -->
-    <label for="my_modal_6" class="btn">open modal</label>
-    <input type="checkbox" id="my_modal_6" class="modal-toggle" />
-    <div class="modal">
-        <div class="modal-box">
-            <h3 class="font-bold text-lg">Hello!</h3>
-            <p class="py-4">This modal works with a hidden checkbox!</p>
-            <div class="modal-action">
-                <label for="my_modal_6" class="btn">Close!</label>
-            </div>
-        </div>
-    </div>
     <section class="bg-white py-4 rounded-b-xl my-10 rounded-xl">
         <div class="container mx-auto flex items-center flex-wrap  pb-12">
             <nav id="store" class="flex w-full z-30 top-0 px-6 py-1">
@@ -75,15 +63,15 @@
                             <tr>
                                 <th class="py-2 px-4 border-l border-b border-gray-300 w-40 font-normal"></th>
                                 <th class="py-2 px-4 border border-gray-300 w-40 font-semibold">Alergi</th>
-                                @if ($item->alergi != null)
+                                @if ($item->product->alergi != null)
                                     <th class="py-2 px-4 border border-gray-300 font-normal leading-5">
-                                        Alergi terhadap <b>{{ $item->alergi->nama }}</b>
+                                        <b>{{ $item->product->alergi->nama }}</b>
                                         <ul>
                                             <li>
-                                                - {{ $item->alergi->deskripsi }}
+                                                - {{ $item->product->alergi->deskripsi }}
                                             </li>
                                             <li>
-                                                - {{ $item->alergi->efek }}
+                                                - {{ $item->product->alergi->efek }}
                                             </li>
                                         </ul>
                                     </th>

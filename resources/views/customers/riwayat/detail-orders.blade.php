@@ -28,7 +28,6 @@
                     <div class="flex items-center justify-between space-x-2 font-semibold text-gray-900 leading-8 ">
                         <span class="tracking-wide text-xl underline my-3">Detail Pesanan </span>
                         <span class=" text-lfont-semibold ">Status Pesanan :
-
                             <span class="text-primary">
                                 {{ $orderStatus->order->status }}
                             </span>
@@ -39,8 +38,38 @@
                             <form method="POST" action="{{ route('history-order.acceptOrder', ['id' => $getIdOrder]) }}"
                                 enctype="multipart/form-data">
                                 @csrf
-                                <button class="mt-4 btn-send-item rounded-xl font-semibold p-3 text-xs text-white uppercase "
+                                <button
+                                    class="mt-4 btn-send-item rounded-xl font-semibold p-3 text-xs text-white uppercase "
                                     style="background:#ef9fbc" type="submit">Terima Pesanan
+                                </button>
+                            </form>
+                        </div>
+                    @elseif($orderStatus->order->status == 'Selesai')
+                        @if ($orderStatus->product_id != null)
+                            @if ($orderStatus->order->updated_at == $mytime)
+                                <div class="flex items-center justify-end space-x-2 font-semibold text-gray-900 leading-8 ">
+                                    <label for="my_modal_7"
+                                        class="mt-4 rounded-xl font-semibold p-3 text-xs text-white uppercase "
+                                        style="background:#ef9fbc; cursor: pointer">Ajukan Pengembalian </label>
+                                </div>
+                            @endif
+                        @endif
+                    @elseif ($orderStatus->order->status == 'Proses Pengembalian')
+                        <div class="flex items-center justify-end space-x-2 font-semibold text-gray-900 leading-8 ">
+                            <span>
+                                <small class="font-light">* Menunggu Konfirmasi Penjual</small>
+                            </span>
+                        </div>
+                    @elseif ($orderStatus->order->status == 'Ajuan Pengembalian Diterima')
+                        <div class="flex items-center justify-end space-x-2 font-semibold text-gray-900 leading-8 ">
+
+                            <form method="POST"
+                                action="{{ route('history-order.sendReturnsBack', ['id' => $orderStatus->order->id]) }}"
+                                enctype="multipart/form-data">
+                                @csrf
+                                <button
+                                    class="mt-4 sendItemBack rounded-xl font-semibold p-3 text-xs text-white uppercase "
+                                    style="background:#ef9fbc" type="submit">Kirim Balik Pesanan
                                 </button>
                             </form>
                         </div>
@@ -54,6 +83,7 @@
                         @endif
                     </div> --}}
                     <div class="mt-4 border-b pb-8">
+
                         <h2 class="font-semibold text-sm text-gray-600">Penerima : <span
                                 class=" font-normal ">{{ Auth::user()->name }}</span></h2>
                         <h2 class="font-semibold text-sm  my-2">Nomor Handphone : <span
@@ -163,6 +193,39 @@
             </form>
             <label class="modal-backdrop" for="my_modal_7">Close</label>
         </div> --}}
+        <input type="checkbox" id="my_modal_7" class="modal-toggle" />
+        <div class="modal">
+            <form method="POST" class="modal-box"
+                action="{{ route('history-order.returns', ['id' => $orderStatus->order->id]) }}"
+                enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" value="{{ $orderStatus->order->id }}" name="order_id">
+                <input type="hidden" value="<?php echo date('Y-m-d'); ?>" name="tanggal">
+                <h3 class="font-bold text-lg">Ajukan Pengembalian</h3>
+                <label class="label">
+                    <span class="label-text">Produk yang dikembalikan</span>
+                </label>
+                @foreach ($orderDetails as $od)
+                    <img src="{{ asset('images/' . $od->product->gambar) }}" alt="product 6" class="w-40 my-2">
+                @endforeach
+
+                <label class="label">
+                    <span class="label-text">Masukkan Bukti Pengembalian :</span>
+                </label>
+                <img src="{{ asset('images/no-profile.png') }}" id="blah" width="150px" height="150px"
+                    class="mt-1 mb-2">
+                <input class=" fomt-sm mt-2" accept="image/*" id="image" type="file" name="bukti" required>
+                <label class="label">
+                    <span class="label-text">Alasan Mengembalikan :</span>
+                </label>
+                <textarea type="text" name="alasan"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"></textarea>
+                <button class="confirm mt-4 btn-checkout rounded-xl font-semibold py-3 text-sm text-white uppercase w-full"
+                    style="background:#ef9fbc" type="submit">Konfirmasi
+                </button>
+            </form>
+            <label class="modal-backdrop" for="my_modal_7">Close</label>
+        </div>
     </section>
 @endsection
 
@@ -184,5 +247,31 @@
                 }
             });
         });
+
+        $('.sendItemBack').click(function(event) {
+            event.preventDefault();
+            var form = $(this).closest("form");
+            Swal.fire({
+                title: 'Kirim Balik Pesanan?',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            })
+        });
+    </script>
+
+    <script type="text/javascript">
+        image.onchange = evt => {
+            const [file] = image.files
+            if (file) {
+                blah.src = URL.createObjectURL(file)
+            }
+        }
     </script>
 @endsection

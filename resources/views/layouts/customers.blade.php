@@ -92,7 +92,7 @@
                             <li><a href="/riwayat-pesanan">Pesanan</a></li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <li><button type="submit">Logasout</button></li>
+                                <li><button type="submit">Log Out</button></li>
                             </form>
                         </ul>
                     @else
@@ -100,7 +100,10 @@
                             class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                             <li><a href="/admin-dashboard">Lihat Toko</a></li>
                             <li><a>Settings</a></li>
-                            <li><a>Logout</a></li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <li><button type="submit">Log Out</button></li>
+                            </form>
                         </ul>
                     @endif
                 @else

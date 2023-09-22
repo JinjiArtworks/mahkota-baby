@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Alergi;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -20,7 +21,8 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        $alergi = Alergi::all();
+        return view('auth.register', compact('alergi'));
     }
 
     /**
@@ -33,7 +35,6 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        // return dd($request->all());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -45,6 +46,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'roles' => 'Customers',
+            'alergi_id' => $request->alergi,
             'password' => Hash::make($request->password),
         ]);
 

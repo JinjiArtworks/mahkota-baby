@@ -35,18 +35,4 @@ class HomeController extends Controller
         $faq = Faq::all();
         return view('customers.faq.index', compact('faq'));
     }
-    public function store(Request $request)
-    {
-        $users = Auth::user();
-        Faq::create([
-            'pesan' => $request->pertanyaan,
-            'users_id' => $users->id,
-        ]);
-        return redirect('/faq')->with('success', 'FAQ berhasil ditambahkan');
-    }
-    public function destroy($id)
-    {
-        Faq::where('id', $id)->delete();
-        return redirect()->back()->with('success', 'FAQ berhasil dihapus.');
-    }
 }
