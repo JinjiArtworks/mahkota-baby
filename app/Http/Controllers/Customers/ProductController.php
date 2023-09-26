@@ -21,14 +21,19 @@ class ProductController extends Controller
         if (Auth::check()) {
             $userAlergi = Auth::user()->alergi_id;
         }
-        $products = Product::when($request->filter_price !=  null, function ($q) use ($request) {
-            if ($request->filter_price == 'Termurah') {
-                return $q->orderBy('harga', 'asc');
-            } else {
-                return $q->orderBy('harga', 'desc');
+        // $products = Product::when($request->filter_price !=  null, function ($q) use ($request) {
+        //     if ($request->filter_price == 'Termurah') {
+        //         return $q->orderBy('harga', 'asc');
+        //     } else {
+        //         return $q->orderBy('harga', 'desc');
+        //     }
+        // })->where('alergi_id', '!=', $userAlergi)->get();
+        $alergi = Alergi::get();
+        $products = Product::when($request->filter_alergi !=  null, function ($q) use ($request) {
+            if ($request->filter_alergi != null) {
+                return $q->where('alergi_id', '!=', $request->filter_alergi);
             }
-        })->where('alergi_id', '!=', $userAlergi)->get();
-
+        })->get();
         // This is if select is multiple and going at the same time
         // $today = Carbon::now()->format('Y-m-d');
         // $products = Product::when(
@@ -47,32 +52,24 @@ class ProductController extends Controller
         //     },
         // )->get();
 
-        return view('customers.products.products', compact('products', 'categories', 'userAlergi'));
+        return view('customers.products.products', compact('products', 'categories', 'userAlergi','alergi'));
     }
     public function detail($id)
     {
         $getId = $id;
-        // return dd($getId);
         $products = Product::find($id);
         $detailProducts = DetailProduk::whereProductId($id)->first();
-        // return dd($detailProducts);
-
         $wishlist = Wishlist::all();
-        // return dd($products->id);
-        // return dd($wishlist);
-        // $getIdProducts = $products->id;
         return view('customers.products.detail-products', compact('products', 'wishlist', 'detailProducts'));
     }
 
     public function infoProduct(Request $request)
     {
         $detailProduk = DetailProduk::get();
-        // return dd($detailProduk->alergi->nama);
         return view('customers.products.informasi-produk', compact('detailProduk'));
     }
     public function addToWishlist(Request $request)
     {
-        // Send into Wishlist
         $user = Auth::user()->id;
         Wishlist::create([
             'user_id' => $user,
@@ -91,14 +88,4 @@ class ProductController extends Controller
         }
         return view('customers.products.products', compact('products'));
     }
-    // public function searchByCat(Request $request)
-    // {
-    //     $cat = Categories::all();
-    //     if ($request->has('cat')) {
-    //         $products = Product::where('categories_id', 'LIKE', '%' . $request->cat . '%')->paginate(5);
-    //     } else {
-    //         $products = Product::paginate(5);
-    //     }
-    //     return view('customers.products.shop', compact('products','cat'));
-    // }
 }

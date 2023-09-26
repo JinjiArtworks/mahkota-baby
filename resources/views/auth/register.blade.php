@@ -34,16 +34,40 @@
                     required />
             </div>
             <div class="mt-4">
-                @foreach ($alergi as $item)
-                    <x-label for="alergi" :value="__('Alergi')" />
-                    <select name="alergi" class="block mt-1 w-full" id="">
-                        <option value=""> -- Tidak ada alergi --</option>
+                <x-label for="alergi" :value="__('Alergi 1 ')" />
+                <select name="alergi_1" class="block mt-1 w-full" id="" required>
+                    <option value=""> -- Tidak ada alergi --</option>
+                    @foreach ($alergi as $item)
                         <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                    </select>
-                    <span>
-                        <small>*Masukkan data jika anda memiliki alergi terhadap suatu produk.</small>
-                    </span>
-                @endforeach
+                    @endforeach
+                </select>
+                <span>
+                    <small>*Masukkan data  jika anda memiliki alergi terhadap suatu produk.</small>
+                </span>
+            </div>
+            <div class="mt-4">
+                <x-label for="alergi" :value="__('Alergi 2 ')" />
+                <select name="alergi_2" class="block mt-1 w-full" id="" required>
+                    <option value=""> -- Tidak ada alergi --</option>
+                    @foreach ($alergi as $item)
+                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                    @endforeach
+                </select>
+                <span>
+                    <small>*Masukkan data  jika anda memiliki alergi terhadap suatu produk.</small>
+                </span>
+            </div>
+            <div class="mt-4">
+                <x-label for="alergi" :value="__('Alergi 3 ')" />
+                <select name="alergi_3" class="block mt-1 w-full" id="" required>
+                    <option value=""> -- Tidak ada alergi --</option>
+                    @foreach ($alergi as $item)
+                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                    @endforeach
+                </select>
+                <span>
+                    <small>*Masukkan data  jika anda memiliki alergi terhadap suatu produk.</small>
+                </span>
             </div>
             <!-- Password -->
             <div class="mt-4">

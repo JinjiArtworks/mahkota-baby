@@ -74,6 +74,7 @@
                             <option value="5-10 Tahun">5-10 Tahun</option>
                         </select>
                     </div>
+
                     <div class="mb-4">
                         <label for="productStock" class="block mb-2 text-sm font-medium text-gray-900 ">Stok
                             Produk
@@ -100,15 +101,28 @@
                         <small>*kosongkan jika tidak ada diskon</small>
                     </div>
                     <div class="mb-4">
+                        <label for="usia" class="block mb-2 text-sm font-medium text-gray-900 ">Kandungan Alergi
+                        </label>
+                        <select id="usia" name="productAlergi"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-3">
+                            <option value="">Tidak Ada Alergi</option>
+                            @foreach ($alergi as $item)
+                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                            @endforeach
+                        </select>
+                        <small>*kosongkan jika tidak ada kandungan alergi.</small>
+
+                    </div>
+                    <div class="mb-4">
                         <label for="productWeight" class="block mb-2 text-sm font-medium text-gray-900 ">Berat
                             Produk
                         </label>
-                        <input type="number" name="productWeight"
+                        <input type="number" name="productWeight" value="300"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  w-full p-3"
                             placeholder="Masukkan Berat Produk" required>
                         <small>*Berat normal produk yaitu 300g / Produk</small>
                     </div>
-                  
+
                     <button type="submit"
                         class="confirm text-white btn-shadow hover:bg-green-400  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2 ">Submit</button>
                 </form>

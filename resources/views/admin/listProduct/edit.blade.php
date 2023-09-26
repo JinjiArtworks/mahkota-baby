@@ -95,6 +95,19 @@
                         <small>*kosongkan jika tidak ada diskon</small>
                     </div>
                     <div class="mb-4">
+                        <label for="alergi" class="block mb-2 text-sm font-medium text-gray-900 ">Kandungan Alergi
+                        </label>
+                        <select id="alergi" name="productAlergi"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-3">
+                            <option value="{{ $products->alergi_id }}">{{ $products->alergi->nama }}</option>
+                            @foreach ($alergi as $item)
+                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                            @endforeach
+                        </select>
+                        <small>*kosongkan jika tidak ada kandungan alergi</small>
+
+                    </div>
+                    <div class="mb-4">
                         <label for="productWeight" class="block mb-2 text-sm font-medium text-gray-900 ">Berat
                             Produk
                         </label>

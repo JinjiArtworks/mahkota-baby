@@ -82,6 +82,7 @@
                                 <div class="flex flex-col justify-center ml-4 flex-grow">
                                     <span class="font-bold text-sm">{{ $c['nama'] }}</span>
                                     <span class="font-normal text-xs">Ukuran : {{ $c['size'] }}</span>
+                                    <span class="font-normal text-xs">Alergi : {{ $c['alergi'] }}</span>
                                 </div>
                             </div>
                             <span class="text-center w-1/5 font-semibold text-sm">x{{ $c['quantity'] }}</span>

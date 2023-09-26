@@ -31,6 +31,7 @@ class CartController extends Controller
                 "harga" => $product->harga,
                 "diskon" => $product->diskon,
                 "stok" => $product->stok,
+                "alergi" => $product->alergi->nama,
                 "deskripsi" => $product->deskripsi,
                 "berat" => $product->berat,
                 "categories" => $product->categories->nama,
@@ -48,6 +49,7 @@ class CartController extends Controller
                     "harga" => $product->harga,
                     "diskon" => $product->diskon,
                     "stok" => $product->stok,
+                    "alergi" => $product->alergi->nama,
                     "deskripsi" => $product->deskripsi,
                     "berat" => $product->berat,
                     "categories" => $product->categories->nama,
@@ -72,7 +74,7 @@ class CartController extends Controller
         $getUsersProvince = Auth::user()->province_id;
         $city  = City::whereId($getUsersCity)->first('name');
         $province  = Province::whereId($getUsersProvince)->first('name');
-        
+
         $allCities = City::all();
         $allProvince = Province::all();
         $cart = session()->get('cart');
@@ -83,8 +85,8 @@ class CartController extends Controller
         }
         $ekspedisi = Ekspedisi::all();
         $kupons = Coupon::all();
-        // return dd($countCart);
-        return view('customers.cart.cart', compact('cart', 'countCart', 'ekspedisi', 'kupons', 'userAddress','getUsersProvince','getUsersCity','city','province','allCities','allProvince'));
+        // return dd($cart);
+        return view('customers.cart.cart', compact('cart', 'countCart', 'ekspedisi', 'kupons', 'userAddress', 'getUsersProvince', 'getUsersCity', 'city', 'province', 'allCities', 'allProvince'));
     }
 
     public function destroy($id)

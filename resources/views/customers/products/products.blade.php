@@ -19,31 +19,47 @@
     <section class="bg-white py-4 rounded-b-xl my-10 rounded-xl">
         <div class="container mx-auto flex items-center flex-wrap  pb-12">
             <nav id="store" class="w-full z-30 top-0 px-6 py-1">
-                <div class="w-full container mx-auto flex flex-wrap items-center justify-between px-2 py-3">
+                <div class="w-full container mx-auto   items-center  px-2 py-3">
                     <a class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl "
                         href="#">
                         Produk Kami
-
                     </a>
+                    <div id="store-nav-content ">
+                        <div class="pt-2   text-gray-600">
+                            <div class="flex justify-end ml-4">
+                                {{-- <form action="" method="get">
+                                    <select id="countries" name="filter_price"
+                                        class="bg-gray-50 border border-gray-100 text-gray-900 text-sm rounded-lg   p-4  ">
+                                        <option value=""> -- Harga -- </option>
+                                        <option
+                                            value="Termurah"{{ Request::get('filter_price') == 'Termurah' ? 'selected' : '' }}>
+                                            Termurah</option>
+                                        <option
+                                            value="Termahal"{{ Request::get('filter_price') == 'Termahal' ? 'selected' : '' }}>
+                                            Termahal</option>
+                                    </select>
+                                    <button type="submit"
+                                        class=" p-3 mr-4 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                                        Filter
+                                    </button>
+                                </form> --}}
+                                <form action="" method="get">
+                                    <select id="countries" name="filter_alergi"
+                                        class="bg-gray-50 border border-gray-100 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  p-4  ">
+                                        <option value="">Hindari produk dengan Alergi : </option>
+                                        @foreach ($alergi as $item)
+                                            <option
+                                                value="{{ $item->id }}"{{ Request::get('filter_alergi') == $item->id ? 'selected' : '' }}>
+                                                {{ $item->nama }}</option>
+                                        @endforeach
 
-                    <div class=" items-center" id="store-nav-content">
-                        <div class="pt-2 relative mx-auto text-gray-600">
-                            <form action="" method="get">
-                                <select id="countries" name="filter_price"
-                                    class="bg-gray-50 border border-gray-100 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  p-4  ">
-                                    <option value="">Urut Berdasarkan</option>
-                                    <option
-                                        value="Termurah"{{ Request::get('filter_price') == 'Termurah' ? 'selected' : '' }}>
-                                        Termurah</option>
-                                    <option
-                                        value="Termahal"{{ Request::get('filter_price') == 'Termahal' ? 'selected' : '' }}>
-                                        Termahal</option>
-                                </select>
-                                <button type="submit"
-                                    class=" p-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                                    Filter
-                                </button>
-                            </form>
+                                    </select>
+                                    <button type="submit"
+                                        class=" p-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                                        Filter
+                                    </button>
+                                </form>
+                            </div>
                             {{--                             
                             <form action="{{ route('products.search') }}" method="GET">
                                 <input
@@ -64,9 +80,7 @@
 
                     </div>
                 </div>
-                <span>
-                    <small>*Produk yang kami tampilkan berbeda dengan jenis alergi yang anda punya.</small>
-                </span>
+               
             </nav>
             @foreach ($products as $item)
                 <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
@@ -87,13 +101,13 @@
             @endforeach
 
         </div>
-        <div class="flex my-4 justify-center">
+        {{-- <div class="flex my-4 justify-center">
             <div class="join">
                 <button class="join-item btn btn-active">1</button>
                 <button class="join-item btn ">2</button>
                 <button class="join-item btn">3</button>
                 <button class="join-item btn">4</button>
             </div>
-        </div>
+        </div> --}}
     </section>
 @endsection
