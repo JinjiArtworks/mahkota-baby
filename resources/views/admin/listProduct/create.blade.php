@@ -64,17 +64,7 @@
                         <textarea type="text"name="productDesc" placeholder="Masukkan Deskripsi Produk"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  w-full p-3"></textarea>
                     </div>
-                    <div class="mb-4">
-                        <label for="usia" class="block mb-2 text-sm font-medium text-gray-900 ">Kategori Usia
-                        </label>
-                        <select id="usia" name="usia"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-3">
-                            <option value="1-2 Tahun">1-2 Tahun</option>
-                            <option value="3-5 Tahun">3-5 Tahun</option>
-                            <option value="5-10 Tahun">5-10 Tahun</option>
-                        </select>
-                    </div>
-
+                  
                     <div class="mb-4">
                         <label for="productStock" class="block mb-2 text-sm font-medium text-gray-900 ">Stok
                             Produk
@@ -101,11 +91,25 @@
                         <small>*kosongkan jika tidak ada diskon</small>
                     </div>
                     <div class="mb-4">
+                        <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 ">Brand Produk
+                        </label>
+                        <input type="text" name="productBrand"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  w-full p-3"
+                            placeholder="Masukkan Brand Produk" >
+                    </div>
+                    <div class="mb-4">
+                        <label for="bahan" class="block mb-2 text-sm font-medium text-gray-900 ">Bahan Produk
+                        </label>
+                        <input type="text" name="productBahan"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  w-full p-3"
+                            placeholder="Masukkan Bahan Produk" >
+                    </div>
+                    <div class="mb-4">
                         <label for="usia" class="block mb-2 text-sm font-medium text-gray-900 ">Kandungan Alergi
                         </label>
                         <select id="usia" name="productAlergi"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-3">
-                            <option value="">Tidak Ada Alergi</option>
+                            <option value=""> -- Tidak Memiliki Kandungan Alergi -- </option>
                             @foreach ($alergi as $item)
                                 <option value="{{ $item->id }}">{{ $item->nama }}</option>
                             @endforeach
@@ -119,7 +123,7 @@
                         </label>
                         <input type="number" name="productWeight" value="300"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  w-full p-3"
-                            placeholder="Masukkan Berat Produk" required>
+                            placeholder="Masukkan Berat Produk" >
                         <small>*Berat normal produk yaitu 300g / Produk</small>
                     </div>
 

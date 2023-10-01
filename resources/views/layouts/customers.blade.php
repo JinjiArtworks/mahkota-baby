@@ -84,11 +84,7 @@
                         <ul tabindex="0"
                             class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                             <li><a href="" class="font-bold">{{ Auth::user()->name }}</li></a>
-                            <li>
-                                <a href="/chat" class="justify-between">
-                                    Obrolan
-                                </a>
-                            </li>
+                         
                             <li><a href="/riwayat-pesanan">Pesanan</a></li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf

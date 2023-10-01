@@ -53,6 +53,8 @@ class ListProductController extends Controller
                 'gambar' => $request->productImage->getClientOriginalName(),
                 'terjual' => 0,
                 'diskon' => $request->productDisc,
+                'brand' => $request->productBrand,
+                'bahan' => $request->productBahan,
             ]);
         }
         return redirect('/admin-products')->with('success', 'Product berhasil ditambahkan');
@@ -86,6 +88,8 @@ class ListProductController extends Controller
                         'gambar' => $request->productImage->getClientOriginalName(),
                         'terjual' => 0,
                         'diskon' => $request->productDisc,
+                        'brand' => $request->productBrand,
+                        'bahan' => $request->productBahan,
                     ]
                 );
         }

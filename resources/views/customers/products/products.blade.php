@@ -54,8 +54,8 @@
                                         @endforeach
 
                                     </select>
-                                    <button type="submit"
-                                        class=" p-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                                    <button
+                                        class=" px-4 py-4 rounded-lg  text-sm bg-secondary p-0 border-0 text-white hover:bg-primary inline-flex justify-center items-center">
                                         Filter
                                     </button>
                                 </form>
@@ -80,7 +80,7 @@
 
                     </div>
                 </div>
-               
+
             </nav>
             @foreach ($products as $item)
                 <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
@@ -96,6 +96,13 @@
                             </svg>
                         </div>
                         <p class="pt-1 text-gray-900">@currency($item->harga)</p>
+                        <span>
+                            <small class="text-secondary">
+                                @if ($item->alergi != null)
+                                    * Alergi : {{ $item->alergi->nama }}
+                                @endif
+                            </small>
+                        </span>
                     </a>
                 </div>
             @endforeach

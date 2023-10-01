@@ -21,30 +21,25 @@ class DashboardController extends Controller
 
         // Total Pesanan
         $totalSalesOrders = Order::count();
-        // return dd($totalSalesOrders);
+
         // Total Pesanan Berhasil
         $totalCompleteOrders = Order::where('status', '=', 'Selesai')->count();
-
         $getClients = DB::table('pesanans')
             ->select('users_id')
             ->groupBy('users_id')
             ->get();
-        // return dd($getClients);
         $totalClients = $getClients->count();
 
-        // Total Products
+        // Total Products Tersedia pada toko
         $getTotalProducts = Product::count();
 
+        // Hitung Pendapatan Bersih
         $checkOrdersComplete = Order::where('status', '=', 'Selesai')->orWhere('status','=','Ajuan Pengembalian Ditolak')->get();
         $countPendapatanTotal = collect($checkOrdersComplete)->sum('total');
         $countOngkosKirim = collect($checkOrdersComplete)->sum('ongkos_kirim');
         $pendapatanBersih = $countPendapatanTotal - $countOngkosKirim;
 
-        // return dd($totalCompleteOrders);
-        // $getReturns = Order::where('status', '=', 'Proses Pengembalian')->get();
-        // $totalReturns = $getReturns->count();
-        // return dd($totalReturns);
-        return view('admin.listReport.dashboard', compact('orders', 'totalSalesOrders','ordersComplete', 'totalClients', 'pendapatanBersih', 'totalCompleteOrders'));
+        return view('admin.listReport.dashboard', compact('orders', 'totalSalesOrders','ordersComplete', 'totalClients', 'pendapatanBersih', 'totalCompleteOrders','getTotalProducts'));
     }
     public function detail($id)
     {

@@ -25,7 +25,7 @@
                         </div>
                         <div class="mt-8">
                             <h1 class="h5 num-4">@currency($pendapatanBersih)</h1>
-                            <p>Total Pendapatan</p>
+                            <p>Total Pendapatan Bersih</p>
                         </div>
                     </div>
                 </div>
@@ -38,8 +38,8 @@
                             <div class="h6 text-yellow-600 fad fa-sitemap"></div>
                         </div>
                         <div class="mt-8">
-                            <h1 class="h5 num-4">10</h1>
-                            <p>total Produk</p>
+                            <h1 class="h5 num-4">{{ $getTotalProducts }}</h1>
+                            <p>Total Produk</p>
                         </div>
                     </div>
                 </div>

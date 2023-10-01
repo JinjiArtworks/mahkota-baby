@@ -23,16 +23,16 @@
                     <a class=" tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl " href="#">
                         Detail Produk Kami
                     </a>
-                    @foreach ($detailProduk as $item)
+                    @foreach ($product as $item)
                         <table class="table-auto border-collapse w-full text-left text-xs my-2">
                             <tr>
                                 <th class="py-2 px-4 border-t border-l border-gray-300 ">
-                                    <img src="{{ asset('images/' . $item->product->gambar) }}" alt="">
+                                    <img src="{{ asset('images/' . $item->gambar) }}" alt="">
                                 </th>
                                 <th class="py-2 px-4 border border-gray-300 w-40 font-semibold">Nama Produk</th>
                                 <th class="py-2 px-4 border border-gray-300 font-normal">
-                                    <span class="flex justify-between">{{ $item->product->nama }}
-                                        <a href="/detail-product/{{ $item->product->id }}"
+                                    <span class="flex justify-between">{{ $item->nama }}
+                                        <a href="/detail-product/{{ $item->id }}"
                                             class="badge badge-secondary text-white text-xs ">Lihat Produk </a>
                                     </span>
                                 </th>
@@ -54,24 +54,19 @@
                                 <th class="py-2 px-4 border border-gray-300 font-normal leading-5">{{ $item->deskripsi }}
                                 </th>
                             </tr>
-                            <tr>
-                                <th class="py-2 px-4 border-l  border-gray-300 w-40 font-normal"></th>
-                                <th class="py-2 px-4 border border-gray-300 w-40 font-semibold">Kandungan</th>
-                                <th class="py-2 px-4 border border-gray-300 font-normal leading-5">{{ $item->kandungan }}
-                                </th>
-                            </tr>
+                          
                             <tr>
                                 <th class="py-2 px-4 border-l border-b border-gray-300 w-40 font-normal"></th>
                                 <th class="py-2 px-4 border border-gray-300 w-40 font-semibold">Alergi</th>
-                                @if ($item->product->alergi != null)
+                                @if ($item->alergi != null)
                                     <th class="py-2 px-4 border border-gray-300 font-normal leading-5">
-                                        <b>{{ $item->product->alergi->nama }}</b>
+                                        <b>{{ $item->alergi->nama }}</b>
                                         <ul>
                                             <li>
-                                                - {{ $item->product->alergi->deskripsi }}
+                                                - {{ $item->alergi->deskripsi }}
                                             </li>
                                             <li>
-                                                - {{ $item->product->alergi->efek }}
+                                                - {{ $item->alergi->efek }}
                                             </li>
                                         </ul>
                                     </th>

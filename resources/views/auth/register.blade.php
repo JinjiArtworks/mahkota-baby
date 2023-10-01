@@ -35,7 +35,7 @@
             </div>
             <div class="mt-4">
                 <x-label for="alergi" :value="__('Alergi 1 ')" />
-                <select name="alergi_1" class="block mt-1 w-full" id="" required>
+                <select name="alergi_1" class="block mt-1 w-full" id="" >
                     <option value=""> -- Tidak ada alergi --</option>
                     @foreach ($alergi as $item)
                         <option value="{{ $item->id }}">{{ $item->nama }}</option>
@@ -47,7 +47,7 @@
             </div>
             <div class="mt-4">
                 <x-label for="alergi" :value="__('Alergi 2 ')" />
-                <select name="alergi_2" class="block mt-1 w-full" id="" required>
+                <select name="alergi_2" class="block mt-1 w-full" id="" >
                     <option value=""> -- Tidak ada alergi --</option>
                     @foreach ($alergi as $item)
                         <option value="{{ $item->id }}">{{ $item->nama }}</option>
@@ -59,7 +59,7 @@
             </div>
             <div class="mt-4">
                 <x-label for="alergi" :value="__('Alergi 3 ')" />
-                <select name="alergi_3" class="block mt-1 w-full" id="" required>
+                <select name="alergi_3" class="block mt-1 w-full" id="" >
                     <option value=""> -- Tidak ada alergi --</option>
                     @foreach ($alergi as $item)
                         <option value="{{ $item->id }}">{{ $item->nama }}</option>

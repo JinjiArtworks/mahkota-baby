@@ -9,6 +9,7 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Product;
+use App\Models\Review;
 use App\Models\Wishlist;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +22,7 @@ class ProductController extends Controller
         if (Auth::check()) {
             $userAlergi = Auth::user()->alergi_id;
         }
+        $userAlergi = "";
         // $products = Product::when($request->filter_price !=  null, function ($q) use ($request) {
         //     if ($request->filter_price == 'Termurah') {
         //         return $q->orderBy('harga', 'asc');
@@ -52,21 +54,24 @@ class ProductController extends Controller
         //     },
         // )->get();
 
-        return view('customers.products.products', compact('products', 'categories', 'userAlergi','alergi'));
+        return view('customers.products.products', compact('products', 'categories', 'userAlergi', 'alergi'));
     }
     public function detail($id)
     {
         $getId = $id;
         $products = Product::find($id);
-        $detailProducts = DetailProduk::whereProductId($id)->first();
+        $getReviews = Review::whereProductId($id)->get();
+        $countReviews = Review::whereProductId($id)->count();
+        // return dd($reviews);
+        // $detailProducts = DetailProduk::whereProductId($id)->first();
         $wishlist = Wishlist::all();
-        return view('customers.products.detail-products', compact('products', 'wishlist', 'detailProducts'));
+        return view('customers.products.detail-products', compact('products', 'wishlist','countReviews','getReviews'));
     }
 
     public function infoProduct(Request $request)
     {
-        $detailProduk = DetailProduk::get();
-        return view('customers.products.informasi-produk', compact('detailProduk'));
+        $product = Product::get();
+        return view('customers.products.informasi-produk', compact('product'));
     }
     public function addToWishlist(Request $request)
     {
