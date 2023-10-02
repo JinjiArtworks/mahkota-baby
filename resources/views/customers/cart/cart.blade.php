@@ -136,7 +136,6 @@
                                     <option value="{{ $item->name }}">{{ $item->name }}</option>
                                 @endforeach
                                 <option value="Ambil Ditempat">Ambil Ditempat</option>
-
                             </select>
                             <select class="block p-2 text-gray-600 w-full text-sm mt-4" name="service" id="services">
                                 <option value="OKE">OKE (4-5 Hari)</option>

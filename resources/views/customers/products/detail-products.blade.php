@@ -55,6 +55,7 @@
                         <p class="text-sm leading-relaxed">• Kategori : {{ $products->categories->nama }}</p>
                         <p class="text-sm leading-relaxed">• Stock : {{ $products->stok }} pcs</p>
                         <p class="text-sm leading-relaxed">• Terjual : {{ $products->terjual }} pcs</p>
+                        <p class="text-sm leading-relaxed ">• {{ $products->jumlah_penilaian }} Person Reviews*</p>
                     </div>
 
                     <form action="{{ route('cart.add', ['id' => $products->id]) }}" method="POST">
@@ -161,11 +162,13 @@
 
                     <tr>
                         @if ($getReviews != null)
-                            @foreach ($getReviews as $item)
-                                <th class="py-2 px-4 border border-gray-300 w-40 font-semibold">Review</th>
-                                <th class="py-2 px-4 border border-gray-300 font-normal leading-5"> <b>User X</b> :
-                                    {{ $item->komentar }} [Memberikan {{ $item->rating }} Bintang] </th>
-                            @endforeach
+                            <th class="py-2 px-4 border border-gray-300 w-40 font-semibold">Review</th>
+                            <th class="py-2 px-4 border border-gray-300 font-normal leading-5">
+                                @foreach ($getReviews as $item)
+                                    <b>User X</b> :
+                                    {{ $item->komentar }} [Memberikan {{ $item->rating }} Bintang] <br>
+                                @endforeach
+                            </th>
                         @endif
                     </tr>
                 </table>

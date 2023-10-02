@@ -25,12 +25,9 @@ class CheckoutProductController extends Controller
         $userAddress = Auth::user()->address;
         $getUsersCity = Auth::user()->city_id;
         $getUsersProvince = Auth::user()->province_id;
-
         $cityName  = City::whereId($getUsersCity)->first('name');
         $provinceName  = Province::whereId($getUsersProvince)->first('name');
-
         $getServices = $request->service;
-        // return dd($request->all());
         if ($request->courier == 'jne') {
             if ($request->origin && $request->destination && $request->berat && $request->courier && $request->province && $request->service) {
                 $origin = $request->origin;
@@ -66,8 +63,7 @@ class CheckoutProductController extends Controller
                 $province = '';
                 $cekongkir = null;
             }
-        }
-        else{
+        } else  {
             $cekongkir = 0;
         }
 
@@ -100,7 +96,7 @@ class CheckoutProductController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        // return dd($user->id);
+        // return dd($request->all());
         $json = json_decode($request->get('json'));
         $cart = session()->get('cart');
         $orders = new Order();
@@ -111,7 +107,11 @@ class CheckoutProductController extends Controller
         $orders->tanggal_orders = Carbon::now();
         $orders->ongkos_kirim = $request->ongkos_kirim;
         $orders->status = 'Sedang Diproses';
-        $orders->ekspedisi = $request->courierService;
+        if ($request->ongkos_kirim == 0) {
+            $orders->ekspedisi = 'Ambil Ditempat';
+        } else {
+            $orders->ekspedisi = $request->getServices;
+        }
         $orders->jenis_pembayaran = $json->payment_type;
         $orders->potongan_kupon = $request->potongan_kupon;
         $orders->total = $request->grandTotal;

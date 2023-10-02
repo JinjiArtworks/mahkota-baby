@@ -15,8 +15,8 @@ class Review extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function products()
+    public function product()
     {
-        return $this->hasOne(Product::class);
+        return $this->belongsTo(Product::class,'product_id');
     }
 }

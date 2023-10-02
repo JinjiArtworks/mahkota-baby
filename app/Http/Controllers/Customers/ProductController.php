@@ -23,36 +23,30 @@ class ProductController extends Controller
             $userAlergi = Auth::user()->alergi_id;
         }
         $userAlergi = "";
-        // $products = Product::when($request->filter_price !=  null, function ($q) use ($request) {
-        //     if ($request->filter_price == 'Termurah') {
-        //         return $q->orderBy('harga', 'asc');
-        //     } else {
-        //         return $q->orderBy('harga', 'desc');
-        //     }
-        // })->where('alergi_id', '!=', $userAlergi)->get();
         $alergi = Alergi::get();
-        $products = Product::when($request->filter_alergi !=  null, function ($q) use ($request) {
-            if ($request->filter_alergi != null) {
+        $products = Product::when(
+            $request->filter_alergi !=  null,
+            function ($q) use ($request) {
                 return $q->where('alergi_id', '!=', $request->filter_alergi);
-            }
-        })->get();
-        // This is if select is multiple and going at the same time
-        // $today = Carbon::now()->format('Y-m-d');
-        // $products = Product::when(
-        //     $request->filter_price !=  null,
-        //     function ($q) use ($request) {
-        //         return $q->where('harga', $request->filter_price);
-        //     },
-        //     // for second select
-        //     function ($q) use ($today) {
-        //         return $q->where('harga', $today);
-        //     }
-        // )->when(
-        //     $request->filter_price !=  null,
-        //     function ($q) use ($request) {
-        //         return $q->where('harga', $request->filter_price);
-        //     },
-        // )->get();
+            },
+            // // for second select
+            // function ($q) use ($request) {
+            //     return $q->where('harga', $request);
+            // }
+        )->when(
+            $request->filter2 !=  null,
+            function ($q) use ($request) {
+                if ($request->filter2 == 'Termurah') {
+                    return $q->orderBy('harga', 'asc');
+                } else if ($request->filter2 == 'Termahal') {
+                    return $q->orderBy('harga', 'desc');
+                } else if ($request->filter2 == 'Terlaris') {
+                    return $q->orderBy('terjual', 'desc');
+                } else if ($request->filter2 == 'BestRating') {
+                    return $q->orderBy('jumlah_penilaian', 'desc');
+                }
+            },
+        )->get();
 
         return view('customers.products.products', compact('products', 'categories', 'userAlergi', 'alergi'));
     }
@@ -62,10 +56,8 @@ class ProductController extends Controller
         $products = Product::find($id);
         $getReviews = Review::whereProductId($id)->get();
         $countReviews = Review::whereProductId($id)->count();
-        // return dd($reviews);
-        // $detailProducts = DetailProduk::whereProductId($id)->first();
         $wishlist = Wishlist::all();
-        return view('customers.products.detail-products', compact('products', 'wishlist','countReviews','getReviews'));
+        return view('customers.products.detail-products', compact('products', 'wishlist', 'countReviews', 'getReviews'));
     }
 
     public function infoProduct(Request $request)
@@ -82,15 +74,5 @@ class ProductController extends Controller
         ]);
 
         return redirect('/wishlist')->with('success', 'Produk berhasil ditambahkan kedalam wishlist');
-    }
-
-    public function search(Request $request)
-    {
-        if ($request->has('search')) {
-            $products = Product::where('nama', 'LIKE', '%' . $request->search . '%')->get();
-        } else {
-            $products = Product::get();;
-        }
-        return view('customers.products.products', compact('products'));
     }
 }

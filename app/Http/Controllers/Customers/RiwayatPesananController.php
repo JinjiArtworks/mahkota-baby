@@ -98,7 +98,8 @@ class RiwayatPesananController extends Controller
     public function storeReview(Request $request, $id)
     {
         $user = Auth::user()->id;
-        $reviewsId = Review::get();
+        $getProducts = Review::whereProductId($id)->first();
+        // return dd($getProducts->product->nama);
         Review::create([
             'user_id' => $user,
             'tanggal' => Carbon::now(),
@@ -109,7 +110,7 @@ class RiwayatPesananController extends Controller
         Product::where('id', $id)
             ->update(
                 [
-                    'rating' => $request->rating,
+                    'jumlah_penilaian' => $getProducts->product->jumlah_penilaian + 1,
                 ]
             );
         return redirect('riwayat-pesanan');
