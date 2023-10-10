@@ -110,7 +110,7 @@ class CheckoutProductController extends Controller
         if ($request->ongkos_kirim == 0) {
             $orders->ekspedisi = 'Ambil Ditempat';
         } else {
-            $orders->ekspedisi = $request->getServices;
+            $orders->ekspedisi = $request->courierService;
         }
         $orders->jenis_pembayaran = $json->payment_type;
         $orders->potongan_kupon = $request->potongan_kupon;

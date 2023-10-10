@@ -20,46 +20,40 @@
         <div class="container mx-auto flex items-center flex-wrap  pb-12">
             <nav id="store" class="w-full z-30 top-0 px-6 py-1">
                 <div class="w-full container mx-auto   items-center  px-2 py-3">
-                    <a class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl "
+                    {{-- <a class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl "
                         href="#">
                         Produk Kami
-                    </a>
+                    </a> --}}
                     <div id="store-nav-content ">
-                        <div class="pt-2   text-gray-600">
-                            <div class="flex justify-end ml-4">
-
-                                <form action="" method="get">
-                                    <select id="countries" name="filter_alergi"
-                                        class="bg-gray-50 border border-gray-100 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  p-4  ">
-                                        <option value=""> -- Hindari produk dengan Alergi : -- </option>
-                                        @foreach ($alergi as $item)
-                                            <option
-                                                value="{{ $item->id }}"{{ Request::get('filter_alergi') == $item->id ? 'selected' : '' }}>
-                                                {{ $item->nama }}</option>
-                                        @endforeach
-                                    </select>
-                                    <select id="countries" name="filter2"
-                                        class="bg-gray-50 border border-gray-100 text-gray-900 text-sm rounded-lg   p-4  ">
-                                        <option value=""> -- Urutkan berdasarkan -- </option>
+                        <div class="pt-2 text-gray-600">
+                            <form action="" method="get">
+                                <select id="countries" name="filter_alergi"
+                                    class="bg-gray-50 border border-gray-100 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  p-4  ">
+                                    <option value=""> -- Hindari produk dengan Alergi : -- </option>
+                                    @foreach ($alergi as $item)
                                         <option
-                                            value="Termurah"{{ Request::get('filter2') == 'Termurah' ? 'selected' : '' }}>
-                                            Harga Termurah</option>
-                                        <option
-                                            value="Termahal"{{ Request::get('filter2') == 'Termahal' ? 'selected' : '' }}>
-                                            Harga Termahal</option>
-                                        <option
-                                            value="Terlaris"{{ Request::get('filter2') == 'Terlaris' ? 'selected' : '' }}>
-                                            Produk Terlaris</option>
-                                        <option
-                                            value="BestRating"{{ Request::get('filter2') == 'BestRating' ? 'selected' : '' }}>
-                                            Rating Terbanyak</option>
-                                    </select>
-                                    <button
-                                        class=" px-4 py-4 rounded-lg  text-sm bg-secondary p-0 border-0 text-white hover:bg-primary inline-flex justify-center items-center">
-                                        Filter
-                                    </button>
-                                </form>
-                            </div>
+                                            value="{{ $item->id }}"{{ Request::get('filter_alergi') == $item->id ? 'selected' : '' }}>
+                                            {{ $item->nama }}</option>
+                                    @endforeach
+                                </select>
+                                <select id="countries" name="filter2"
+                                    class="bg-gray-50 border border-gray-100 text-gray-900 text-sm rounded-lg   p-4  ">
+                                    <option value=""> -- Urutkan berdasarkan -- </option>
+                                    <option value="Termurah"{{ Request::get('filter2') == 'Termurah' ? 'selected' : '' }}>
+                                        Harga Termurah</option>
+                                    <option value="Termahal"{{ Request::get('filter2') == 'Termahal' ? 'selected' : '' }}>
+                                        Harga Termahal</option>
+                                    <option value="Terlaris"{{ Request::get('filter2') == 'Terlaris' ? 'selected' : '' }}>
+                                        Produk Terlaris</option>
+                                    <option
+                                        value="BestRating"{{ Request::get('filter2') == 'BestRating' ? 'selected' : '' }}>
+                                        Rating Terbanyak</option>
+                                </select>
+                                <button
+                                    class=" px-4 py-4 rounded-lg  text-sm bg-secondary p-0 border-0 text-white hover:bg-primary inline-flex justify-center items-center">
+                                    Filter
+                                </button>
+                            </form>
                             {{--                             
                             <form action="{{ route('products.search') }}" method="GET">
                                 <input
@@ -96,10 +90,10 @@
                             </svg>
                         </div>
                         <p class="pt-1 text-gray-900">@currency($item->harga)</p>
-                        
+
                         <span>
                             <small>
-                                Terjual : {{ $item->terjual }} 
+                                Terjual : {{ $item->terjual }}
                             </small>
                         </span>
                         <br>
