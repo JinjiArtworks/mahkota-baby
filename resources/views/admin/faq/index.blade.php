@@ -62,7 +62,7 @@
                                         enctype="multipart/form-data">
                                         @csrf
                                         {{ method_field('put') }}
-                                        <textarea type="text" placeholder="Ubah Jawaban" required name="jawaban"
+                                        <textarea type="text" placeholder="Masukkan Jawaban" required name="jawaban"
                                             class="border-2  mb-4 p-2 text-gray-600 w-full text-sm"></textarea>
                                         <button type="submit"
                                             class="confirm-answer text-white btn-shadow hover:bg-green-400  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2 ">Kirim</button>

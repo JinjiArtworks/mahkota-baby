@@ -67,8 +67,7 @@
                                 action="{{ route('history-order.sendReturnsBack', ['id' => $orderStatus->order->id]) }}"
                                 enctype="multipart/form-data">
                                 @csrf
-                                <button
-                                    class="mt-4 sendItemBack rounded-xl font-semibold p-3 text-xs text-white uppercase "
+                                <button class="mt-4 sendItemBack rounded-xl font-semibold p-3 text-xs text-white uppercase "
                                     style="background:#ef9fbc" type="submit">Kirim Balik Pesanan
                                 </button>
                             </form>
@@ -120,7 +119,7 @@
                             @endif
                             <span class="text-center w-1/5 font-semibold text-sm">@currency($item->harga * $item->qty)</span>
                             <form method="GET"
-                                action="{{ route('history-order.reviewPages', ['id' => $item->product_id]) }}"
+                                action="{{ route('history-order.reviewPages', ['id' => $item->order->id]) }}"
                                 enctype="multipart/form-data">
                                 <button class="flex text-secondary text-xs hover:text-primary underline">
                                     Review
@@ -151,8 +150,10 @@
                                     <td>@currency($item->order->diskon)</td>
                                     @if ($item->order->ekspedisi == 'REG')
                                         <td>JNE - {{ $item->order->ekspedisi }} (2-3 Hari)</td>
-                                    @else
+                                    @elseif ($item->order->ekspedisi == 'REG')
                                         <td>JNE - {{ $item->order->ekspedisi }} (3-4 Hari)</td>
+                                    @else
+                                        <td>{{ $item->order->ekspedisi }}</td>
                                     @endif
                                     <td>{{ $item->order->jenis_pembayaran }}</td>
                                     <td>@currency($item->order->total)</td>

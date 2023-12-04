@@ -37,7 +37,7 @@ class RiwayatPesananController extends Controller
         $orderDetails = OrderDetail::whereOrderId($id)->get();
         $orderStatus = OrderDetail::whereOrderId($id)->first();
         $mytime = Carbon::now()->today()->toDateTimeString();
-
+        // dd($orderDetails->);
         $getUsersCity = Auth::user()->city_id;
         $getUsersProvince = Auth::user()->province_id;
 
@@ -87,12 +87,14 @@ class RiwayatPesananController extends Controller
     public function reviewPages($id)
     {
         $getIdOrder = $id;
-        $reviews = Review::all();
         // return dd($reviews->product_id);
         $user = Auth::user()->id;
         // $checkOrdersComplete = Order::where('status', '=', 'Selesai')->orWhere('status','=','Ajuan Pengembalian Ditolak')->get();
-
-        $orderDetails = OrderDetail::whereProductId($id)->first();
+        
+        $orderDetails = OrderDetail::whereOrderId($id)->first();
+        $reviews = Review::whereProductId($orderDetails->product->id)->first();
+        // dd($reviews);
+        // dd($orderDetails);
         return view('customers.riwayat.send-review', compact('orderDetails', 'getIdOrder', 'reviews'));
     }
     public function storeReview(Request $request, $id)

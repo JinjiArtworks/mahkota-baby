@@ -55,52 +55,55 @@
                         @endif
                         <span class="text-center w-1/5 font-semibold text-sm">@currency($orderDetails->harga * $orderDetails->qty)</span>
                     </div>
-                    @if ($orderDetails->product->rating == null)
-                        @if ($orderDetails->order->status == 'Selesai')
-                            <form method="POST"
-                                action="{{ route('history-order.review', ['id' => $orderDetails->product_id]) }}"
-                                enctype="multipart/form-data">
-                                @csrf
-                                <hr class="mt-4 mb-4">
-                                <h3 class="font-bold text-lg underline">Berikan Review </h3>
-                                <label class="label">
-                                    <span class="label-text ">Rating Anda : </span>
-                                </label>
-                                <div class="rating">
-                                    <input type="radio" name="rating" value="1"
-                                        class="mask mask-star-2 bg-orange-400" />
-                                    <input type="radio" name="rating" value="2"
-                                        class="mask mask-star-2 bg-orange-400" />
-                                    <input type="radio" name="rating" value="3"
-                                        class="mask mask-star-2 bg-orange-400" />
-                                    <input type="radio" name="rating" value="4"
-                                        class="mask mask-star-2 bg-orange-400" />
-                                    <input type="radio" name="rating" value="5"
-                                        class="mask mask-star-2 bg-orange-400" checked />
-                                </div>
-                                <label class="label">
-                                    <span class="label-text">Komentar</span>
-                                </label>
-                                <textarea name="comment" class="block p-2 text-gray-600 w-full text-sm" placeholder="Masukkan Komentar"></textarea>
-                                <button
-                                    class="confirm mt-4 btn-checkout rounded-xl font-semibold p-3 text-xs text-white uppercase "
-                                    style="background:#ef9fbc" type="submit">Konfirmasi
-                                </button>
-                            </form>
-                        @elseif ($orderDetails->order->status == 'Sedang Diproses')
-                            <div class="mt-4">
-                                <p>Selesaikan Pesanan Untuk Memberikan Review</p>
+                    {{-- @if ($orderDetails->product->rating == null) --}}
+                    @if ($orderDetails->order->status == 'Selesai')
+                        {{-- {{ dd($orderDetails->order->status) }} --}}
+                        {{-- @if ($orderDetails->product_id == $reviews->product_id && $reviews->user_id == Auth::user()->id) --}}
+                        <form method="POST"
+                            action="{{ route('history-order.review', ['id' => $orderDetails->product_id]) }}"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <hr class="mt-4 mb-4">
+                            <h3 class="font-bold text-lg underline">Berikan Review </h3>
+                            <label class="label">
+                                <span class="label-text ">Rating Anda : </span>
+                            </label>
+                            <div class="rating">
+                                <input type="radio" name="rating" value="1"
+                                    class="mask mask-star-2 bg-orange-400" />
+                                <input type="radio" name="rating" value="2"
+                                    class="mask mask-star-2 bg-orange-400" />
+                                <input type="radio" name="rating" value="3"
+                                    class="mask mask-star-2 bg-orange-400" />
+                                <input type="radio" name="rating" value="4"
+                                    class="mask mask-star-2 bg-orange-400" />
+                                <input type="radio" name="rating" value="5" class="mask mask-star-2 bg-orange-400"
+                                    checked />
                             </div>
-                        @elseif ($orderDetails->order->status == 'Pesanan Dikirim')
-                            <div class="mt-4">
-                                <p>Selesaikan Pesanan Untuk Memberikan Review</p>
-                            </div>
-                        @endif
-                    @else
+                            <label class="label">
+                                <span class="label-text">Komentar</span>
+                            </label>
+                            <textarea name="comment" class="block p-2 text-gray-600 w-full text-sm" placeholder="Masukkan Komentar"></textarea>
+                            <button
+                                class="confirm mt-4 btn-checkout rounded-xl font-semibold p-3 text-xs text-white uppercase "
+                                style="background:#ef9fbc" type="submit">Konfirmasi
+                            </button>
+                        </form>
+                        {{-- @endif --}}
+                    @elseif ($orderDetails->order->status == 'Sedang Diproses')
                         <div class="mt-4">
-                            <p>Anda sudah memberikan review terhadap produk ini.</p>
+                            <p>Selesaikan Pesanan Untuk Memberikan Review</p>
+                        </div>
+                    @elseif ($orderDetails->order->status == 'Pesanan Dikirim')
+                        <div class="mt-4">
+                            <p>Selesaikan Pesanan Untuk Memberikan Review</p>
                         </div>
                     @endif
+                    {{-- @else --}}
+                    {{-- <div class="mt-4">
+                            <p>Anda sudah memberikan review terhadap produk ini.</p>
+                        </div>
+                    @endif --}}
 
                     {{-- @endforeach --}}
                 </div>

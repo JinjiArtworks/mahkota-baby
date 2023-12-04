@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
     }
     public function boot()
     {
-        Blade::directive('currency', function (string|int $text) {
+        Blade::directive('currency', function (string $text) {
             return "Rp <?= number_format($text, 0, ',' , '.') ?>";
         });
     }

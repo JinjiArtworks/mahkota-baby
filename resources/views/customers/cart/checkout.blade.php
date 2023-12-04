@@ -28,9 +28,7 @@
         }
     @endphp
     <div class="container mx-auto">
-
         <div class="flex shadow-md mt-10 rounded-xl">
-
             <div class="w-full bg-white px-10 py-10 rounded-xl ">
                 <div class="flex justify-between border-b pb-8">
                     <h1 class="font-semibold text-2xl">Informasi Pesanan</h1>

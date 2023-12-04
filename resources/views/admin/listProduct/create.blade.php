@@ -64,7 +64,7 @@
                         <textarea type="text"name="productDesc" placeholder="Masukkan Deskripsi Produk"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  w-full p-3"></textarea>
                     </div>
-                  
+
                     <div class="mb-4">
                         <label for="productStock" class="block mb-2 text-sm font-medium text-gray-900 ">Stok
                             Produk
@@ -95,14 +95,14 @@
                         </label>
                         <input type="text" name="productBrand"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  w-full p-3"
-                            placeholder="Masukkan Brand Produk" >
+                            placeholder="Masukkan Brand Produk">
                     </div>
                     <div class="mb-4">
                         <label for="bahan" class="block mb-2 text-sm font-medium text-gray-900 ">Bahan Produk
                         </label>
                         <input type="text" name="productBahan"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  w-full p-3"
-                            placeholder="Masukkan Bahan Produk" >
+                            placeholder="Masukkan Bahan Produk">
                     </div>
                     <div class="mb-4">
                         <label for="usia" class="block mb-2 text-sm font-medium text-gray-900 ">Kandungan Alergi
@@ -123,7 +123,7 @@
                         </label>
                         <input type="number" name="productWeight" value="300"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  w-full p-3"
-                            placeholder="Masukkan Berat Produk" >
+                            placeholder="Masukkan Berat Produk">
                         <small>*Berat normal produk yaitu 300g / Produk</small>
                     </div>
 

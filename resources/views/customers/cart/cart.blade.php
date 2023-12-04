@@ -163,16 +163,24 @@
                                 <span>@currency($subtotal)</span>
                             </div>
                         </div>
-                        @if (Auth::user()->address != null)
-                            <button type="submit"
-                                class="btn-checkout rounded-xl bg-white font-semibold py-3 text-sm hover:bg-primary hover:text-white text-secondary uppercase w-full">Checkout
-                            </button>
-                        @else
+                        @if (Auth::user()->roles != 'Customers')
                             <button type="submit"
                                 class="btn-checkout rounded-xl bg-white font-semibold py-3 text-sm hover:bg-primary hover:text-white text-secondary uppercase w-full"
                                 disabled>Checkout
                             </button>
+                        @else
+                            @if (Auth::user()->address != null)
+                                <button type="submit"
+                                    class="btn-checkout rounded-xl bg-white font-semibold py-3 text-sm hover:bg-primary hover:text-white text-secondary uppercase w-full">Checkout
+                                </button>
+                            @else
+                                <button type="submit"
+                                    class="btn-checkout rounded-xl bg-white font-semibold py-3 text-sm hover:bg-primary hover:text-white text-secondary uppercase w-full"
+                                    disabled>Checkout
+                                </button>
+                            @endif
                         @endif
+
                     </form>
 
                 </div>

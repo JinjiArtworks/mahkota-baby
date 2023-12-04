@@ -4,14 +4,13 @@
         <!-- Start Recent Sales -->
         <div class="card col-span-2 xl:col-span-1">
             <div class="card-header flex justify-between">
-                <p class="text-2xl text-black ">Tambah Produk</p>
+                <p class="text-2xl text-black ">Ubah Produk</p>
             </div>
             <div class="p-6">
                 <form method="POST"
                     action="{{ route('products.update', ['id' => $products->id]) }} "enctype="multipart/form-data">
                     @csrf
                     {{ method_field('put') }}
-
                     <div class="mb-4">
                         <label for="productName" class="block mb-2 text-sm font-medium text-gray-900 ">Nama
                             Produk</label>
