@@ -138,6 +138,7 @@
                                     <th>Tanggal</th>
                                     <th>Ongkos Kirim</th>
                                     <th>Diskon</th>
+                                    <th>Potongan Harga Kupon</th>
                                     <th>Ekspedisi</th>
                                     <th>Jenis Pembayaran</th>
                                     <th>Total</th>
@@ -148,6 +149,7 @@
                                     <td>{{ $item->order->tanggal_orders }}</td>
                                     <td>@currency($item->order->ongkos_kirim)</td>
                                     <td>@currency($item->order->diskon)</td>
+                                    <td>@currency($item->order->potongan_kupon)</td>
                                     @if ($item->order->ekspedisi == 'REG')
                                         <td>JNE - {{ $item->order->ekspedisi }} (2-3 Hari)</td>
                                     @elseif ($item->order->ekspedisi == 'REG')

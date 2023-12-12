@@ -29,10 +29,6 @@ class ProductController extends Controller
             function ($q) use ($request) {
                 return $q->where('alergi_id', '!=', $request->filter_alergi);
             },
-            // // for second select
-            // function ($q) use ($request) {
-            //     return $q->where('harga', $request);
-            // }
         )->when(
             $request->filter2 !=  null,
             function ($q) use ($request) {
@@ -46,8 +42,21 @@ class ProductController extends Controller
                     return $q->orderBy('jumlah_penilaian', 'desc');
                 }
             },
+        )->when(
+            $request->start_age && $request->end_age !=  null,
+            function ($q) use ($request) {
+                return $q->whereBetween('usia', [$request->start_age, $request->end_age]);
+            }
         )->get();
-
+        // $orders = Order::when(
+        //     $request->filter_status !=  null,
+        //     function ($q) use ($request) {
+        //         return $q->where('status', '=', $request->filter_status);
+        //     },
+        //     function ($q) use ($request) {
+        //         return $q->whereBetween('tanggal', [$request->start_date, $request->end_date]);
+        //     },
+        // )->get();
         return view('customers.products.products', compact('products', 'categories', 'userAlergi', 'alergi'));
     }
     public function detail($id)

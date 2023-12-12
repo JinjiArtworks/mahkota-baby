@@ -49,6 +49,40 @@
                                         value="BestRating"{{ Request::get('filter2') == 'BestRating' ? 'selected' : '' }}>
                                         Rating Terbanyak</option>
                                 </select>
+                                <select id="countries" name="start_age"
+                                    class="bg-gray-50 border border-gray-100 text-gray-900 text-sm rounded-lg   p-4  ">
+                                    <option value=""> -- Awal Usia -- </option>
+                                    <option value="0">0 Tahun</option>
+                                    <option value="1">1 Tahun</option>
+                                    <option value="2">2 Tahun</option>
+                                    <option value="3">3 Tahun</option>
+                                    <option value="4">4 Tahun</option>
+                                    <option value="5">5 Tahun</option>
+                                    <option value="6">6 Tahun</option>
+                                    <option value="7">8 Tahun</option>
+                                    <option value="8">8 Tahun</option>
+                                    <option value="9">9 Tahun</option>
+                                </select>
+                                <select id="countries" name="end_age"
+                                    class="bg-gray-50 border border-gray-100 text-gray-900 text-sm rounded-lg   p-4  ">
+                                    <option value=""> -- Batas Usia -- </option>
+                                    <option value="0">0 Tahun</option>
+                                    <option value="1">1 Tahun</option>
+                                    <option value="2">2 Tahun</option>
+                                    <option value="3">3 Tahun</option>
+                                    <option value="4">4 Tahun</option>
+                                    <option value="5">5 Tahun</option>
+                                    <option value="6">6 Tahun</option>
+                                    <option value="7">8 Tahun</option>
+                                    <option value="8">8 Tahun</option>
+                                    <option value="9">9 Tahun</option>
+                                </select>
+                                {{-- <input type="number"
+                                    class="bg-gray-50 border border-gray-100 text-gray-900 text-sm rounded-lg   p-4 "
+                                    name="start_age">
+                                <input type="number"
+                                    class="bg-gray-50 border border-gray-100 text-gray-900 text-sm rounded-lg   p-4 "
+                                    name="end_age"> --}}
                                 <button
                                     class=" px-4 py-4 rounded-lg  text-sm bg-secondary p-0 border-0 text-white hover:bg-primary inline-flex justify-center items-center">
                                     Filter
@@ -94,6 +128,12 @@
                         <span>
                             <small>
                                 Terjual : {{ $item->terjual }}
+                            </small>
+                        </span> 
+                        <br>
+                        <span>
+                            <small>
+                                Produk untuk usia : {{ $item->usia }} Tahun
                             </small>
                         </span>
                         <br>
